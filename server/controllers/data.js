@@ -31,7 +31,9 @@ const getAllCountries = (req, res) => {
     .then(response => response.json())
     .then(data => {
       // can manipulate data as needed here before sending it back as response
-      console.log(data);
+      const canada = data.find(obj => obj['country'] === "Canada");  // example: fetching one country from array
+      console.log(canada);
+      // console.log(data);
       res.send(data);
     })
     .catch(err => console.log(`Error found: ${err}`))
