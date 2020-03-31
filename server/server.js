@@ -14,20 +14,18 @@ const data = require('./controllers/data');
 const app = express();
 const frontendPort = 3000;
 
-app.use(cors({ origin: `http://localhost:${frontendPort}` }));
+app.use(cors({ origin: `http://localhost:${frontendPort}` }));  // cross origin resource sharing
 // app.use(bodyParser.json());
-app.use(helmet());
-app.use(morgan('combined'));
+app.use(helmet());  // security for headers
+app.use(morgan('combined'));  // logging
 
+// api routes
 app.get('/', (req, res) => res.send('Hello World!'));
-// app.get('/all', (req, res) => {
-//   const allData = data.getAll;
-//   console.log(allData);
-//   res.send(allData);
-// });
 app.get('/all', data.getAll);
+app.get('/country/all', data.getAllCountries);  // need this line above otherwise 'all' is considered a parameter
+app.get('/country/:country', data.getCountry);
 
 
 const backendPort = 5000;
 
-app.listen(5000, () => console.log(`App running on port ${backendPort} - http://localhost:5000`));
+app.listen(5000, () => console.log(`App running on port ${backendPort} - http://localhost:${backendPort}`));
