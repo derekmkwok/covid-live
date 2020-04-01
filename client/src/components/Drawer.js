@@ -55,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
     // backgroundColor: 'theme.palette.background.default',
     backgroundColor: '#282c34',
     padding: theme.spacing(3),
+    height: '100vh'
   },
 }));
 
