@@ -13,6 +13,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faViruses } from '@fortawesome/free-solid-svg-icons'
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -43,7 +46,8 @@ const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
-    backgroundColor: 'theme.palette.background.default',
+    // backgroundColor: 'theme.palette.background.default',
+    backgroundColor: '#282c34',
     padding: theme.spacing(3),
   },
 }));
@@ -58,6 +62,7 @@ export default function PermanentDrawerLeft() {
         <AppBar position="fixed" className={classes.appBar} style={{backgroundColor:'#282c34'}}>
           <Toolbar>
             <Typography variant="h6" noWrap>
+            <FontAwesomeIcon icon={faViruses} style={{marginRight: '10px'}}></FontAwesomeIcon>
               COVID-19 Live Tracker
             </Typography>
           </Toolbar>
@@ -81,6 +86,12 @@ export default function PermanentDrawerLeft() {
                 </ListItem>
               </Link>
             ))} */}
+            <Link to='/' style={{ textDecoration: 'none' }}>
+              <ListItem button key='Home'>
+              <ListItemIcon><InboxIcon /></ListItemIcon>
+              <ListItemText primary='Home' />
+              </ListItem>
+            </Link>
             <Link to='/cases' style={{ textDecoration: 'none' }}>
               <ListItem button key='Cases'>
               <ListItemIcon><InboxIcon /></ListItemIcon>
@@ -104,7 +115,7 @@ export default function PermanentDrawerLeft() {
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <Typography paragraph>
+          <Typography paragraph style={{color: '#FFF'}}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
             ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
             facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
