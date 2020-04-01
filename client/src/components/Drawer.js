@@ -13,9 +13,15 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faViruses } from '@fortawesome/free-solid-svg-icons'
+// Font awesome icon imports
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLungsVirus } from '@fortawesome/free-solid-svg-icons';
+import { faShieldVirus } from '@fortawesome/free-solid-svg-icons';
+import { faHouseUser } from '@fortawesome/free-solid-svg-icons';
+import { faHospital } from '@fortawesome/free-solid-svg-icons';
+import { faChartBar } from '@fortawesome/free-solid-svg-icons';
 
+// React Router import
 import {
   BrowserRouter as Router,
   Switch,
@@ -62,7 +68,7 @@ export default function PermanentDrawerLeft() {
         <AppBar position="fixed" className={classes.appBar} style={{backgroundColor:'#282c34'}}>
           <Toolbar>
             <Typography variant="h6" noWrap>
-            <FontAwesomeIcon icon={faViruses} style={{marginRight: '10px'}}></FontAwesomeIcon>
+            <FontAwesomeIcon icon={faLungsVirus} style={{marginRight: '10px'}}></FontAwesomeIcon>
               COVID-19 Live Tracker
             </Typography>
           </Toolbar>
@@ -88,25 +94,25 @@ export default function PermanentDrawerLeft() {
             ))} */}
             <Link to='/' style={{ textDecoration: 'none' }}>
               <ListItem button key='Home'>
-              <ListItemIcon><InboxIcon /></ListItemIcon>
+              <FontAwesomeIcon icon={faHouseUser} style={{marginRight: '25px'}} size='2x'></FontAwesomeIcon>
               <ListItemText primary='Home' />
               </ListItem>
             </Link>
             <Link to='/cases' style={{ textDecoration: 'none' }}>
               <ListItem button key='Cases'>
-              <ListItemIcon><InboxIcon /></ListItemIcon>
+              <FontAwesomeIcon icon={faHospital} style={{marginRight: '28px', marginLeft: '3px'}} size='2x'></FontAwesomeIcon>
               <ListItemText primary='Cases' />
               </ListItem>
             </Link>
             <Link to='/graphs' style={{ textDecoration: 'none' }}>
-              <ListItem button key='Graphs'>
-              <ListItemIcon><InboxIcon /></ListItemIcon>
-              <ListItemText primary='Graphs' />
+              <ListItem button key='Charts'>
+              <FontAwesomeIcon icon={faChartBar} style={{marginRight: '25px', marginLeft: '2px'}} size='2x'></FontAwesomeIcon>
+              <ListItemText primary='Charts' />
               </ListItem>
             </Link>
             <Link to='/information' style={{ textDecoration: 'none' }}>
               <ListItem button key='Information'>
-              <ListItemIcon><InboxIcon /></ListItemIcon>
+              <FontAwesomeIcon icon={faShieldVirus} style={{marginRight: '26px', marginLeft: '2px'}} size='2x'></FontAwesomeIcon>
               <ListItemText primary='Information' />
               </ListItem>
             </Link>
@@ -151,7 +157,7 @@ export default function PermanentDrawerLeft() {
           <Route path="/cases">
             {/* <About /> */}
           </Route>
-          <Route path="/graphs">
+          <Route path="/charts">
             {/* <Users /> */}
           </Route>
           <Route path="/information">
