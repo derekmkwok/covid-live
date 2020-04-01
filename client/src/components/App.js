@@ -13,6 +13,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 
+// Component import
+import Home from './Home';
+import Cases from './Cases';
+
 // Font awesome icon imports
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLungsVirus } from '@fortawesome/free-solid-svg-icons';
@@ -46,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: drawerWidth,
     backgroundColor: '#424242',
-    borderColor: 'black'
+    // borderColor: 'gray'
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
@@ -55,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     // backgroundColor: 'theme.palette.background.default',
     backgroundColor: '#282c34',
     padding: theme.spacing(3),
-    height: '100vh'
+    height: '100%'
   },
 }));
 
@@ -68,7 +72,7 @@ export default function PermanentDrawerLeft() {
         <CssBaseline />
         <AppBar position="fixed" className={classes.appBar} style={{backgroundColor:'#282c34'}}>
           <Toolbar>
-            <Typography variant="h6" noWrap>
+            <Typography variant="h6" noWrap style={{margin: 'auto'}}>
             <FontAwesomeIcon icon={faLungsVirus} style={{marginRight: '10px'}}></FontAwesomeIcon>
               COVID-19 Live Tracker
             </Typography>
@@ -119,49 +123,19 @@ export default function PermanentDrawerLeft() {
             </Link>
           </List>
           <Divider />
-        </Drawer>
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-          <Typography paragraph style={{color: '#FFF'}}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-            ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-            facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-            gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-            donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-            adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-            Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
-            imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-            arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-            donec massa sapien faucibus et molestie ac.
-          </Typography>
-          <Typography paragraph>
-            Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla
-            facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac
-            tincidunt. Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat
-            consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus sed
-            vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in. In
-            hendrerit gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem et
-            tortor. Habitant morbi tristique senectus et. Adipiscing elit duis tristique sollicitudin
-            nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
-            accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
-          </Typography>
-          <Link to='./cases'>
-          <button>test</button>
-        </Link>
-        </main>
-        
+        </Drawer>        
 
         <Switch>
-          <Route path="/">
-            {/* <About /> */}
+          <Route path="/" exact>
+            <Home />
           </Route>
-          <Route path="/cases">
-            {/* <About /> */}
+          <Route path="/cases" exact>
+            <Cases />
           </Route>
-          <Route path="/charts">
+          <Route path="/charts" exact>
             {/* <Users /> */}
           </Route>
-          <Route path="/information">
+          <Route path="/information" exact>
             {/* <Home /> */}
           </Route>
         </Switch>
