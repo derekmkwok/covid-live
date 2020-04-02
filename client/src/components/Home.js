@@ -52,8 +52,8 @@ export default function Home() {
   const [active, setActive] = useState(0);
   const [countries, setCountries] = useState(0);
  
-  // const data = fetch(`${root}/all`);
   useEffect(() => {
+    // fetch(`${root}/all`)
     fetch(`http://localhost:5000/all`)
       .then(response => response.json())
       .then(data => {
@@ -73,12 +73,25 @@ export default function Home() {
         {/* <Typography paragraph variant='h5' style={{color: '#FFF'}}>
           <b>Welcome to the COVID-19 Live Tracker Web Application</b>
         </Typography> */}
-        <Typography paragraph variant='h6' style={{color: '#FFF'}}>
-          Total Cases: {cases != 0 ? cases : 'Loading total cases...'}
+        <Typography paragraph variant='h3' style={{color: 'tan', textDecoration: 'underline', margin: 'auto'}}>
+          Worldwide Statistics
         </Typography>
-        <Link to='./cases'>
-          <button>test</button>
-        </Link>
+        <br></br>
+        <Typography paragraph variant='h4' style={{color: '#6495ED'}}>
+          Total Cases: {cases != 0 ? cases : 'Loading...'}
+        </Typography>
+        <Typography paragraph variant='h4' style={{color: 'red'}}>
+          Deaths: {deaths != 0 ? deaths : 'Loading...'}
+        </Typography>
+        <Typography paragraph variant='h4' style={{color: 'green'}}>
+          Recovered: {recovered != 0 ? recovered : 'Loading...'}
+        </Typography>
+        <Typography paragraph variant='h4' style={{color: 'yellow'}}>
+          Active: {active != 0 ? active : 'Loading...'}
+        </Typography>
+        <Typography paragraph variant='h4' style={{color: '#A9A9A9'}}>
+          Countries with Active Cases: {countries != 0 ? countries : 'Loading...'}
+        </Typography>
       </main>
     </div>
   );

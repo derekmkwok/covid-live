@@ -5,7 +5,6 @@ const getAll = (req, res) => {
   fetch('https://corona.lmao.ninja/all')
     .then(response => response.json())
     .then(data => {
-      // can manipulate data as needed here before sending it back as response
       console.log(data);
       res.send(data);
     })
@@ -18,7 +17,6 @@ const getCountry = (req, res) => {
   fetch(`https://corona.lmao.ninja/countries/${country}`)
     .then(response => response.json())
     .then(data => {
-      // can manipulate data as needed here before sending it back as response
       console.log(data);
       res.send(data);
     })
@@ -30,7 +28,6 @@ const getAllCountries = (req, res) => {
   fetch('https://corona.lmao.ninja/countries?sort=country')
     .then(response => response.json())
     .then(data => {
-      // can manipulate data as needed here before sending it back as response
       const canada = data.find(obj => obj['country'] === "Canada");  // example: fetching one country from array
       console.log(canada);
       // console.log(data);
