@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
@@ -40,39 +40,44 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const root = window.location.protocol + '//' + window.location.host;
+
 export default function Home() {
   const classes = useStyles();
-  console.log(classes);
+
+  // Hooks
+  const [cases, setCases] = useState(0);
+  const [deaths, setDeaths] = useState(0);
+  const [recovered, setRecovered] = useState(0);
+  const [active, setActive] = useState(0);
+  const [countries, setCountries] = useState(0);
+ 
+  // const data = fetch(`${root}/all`);
+  useEffect(() => {
+    fetch(`http://localhost:5000/all`)
+      .then(response => response.json())
+      .then(data => {
+        setCases(data['cases']);
+        setDeaths(data['deaths']);
+        setRecovered(data['recovered']);
+        setActive(data['active']);
+        setCountries(data['affectedCountries']);
+      })
+      .catch(err => console.log('Error fetching data'));
+  });
 
   return (
     <div>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Typography paragraph variant='h2' style={{color: '#FFF'}}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-          facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-          gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-          donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-          Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
-          imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-          arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-          donec massa sapien faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph style={{color: '#FFF'}}>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla
-          facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac
-          tincidunt. Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat
-          consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus sed
-          vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in. In
-          hendrerit gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem et
-          tortor. Habitant morbi tristique senectus et. Adipiscing elit duis tristique sollicitudin
-          nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
-          accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
+        {/* <Typography paragraph variant='h5' style={{color: '#FFF'}}>
+          <b>Welcome to the COVID-19 Live Tracker Web Application</b>
+        </Typography> */}
+        <Typography paragraph variant='h6' style={{color: '#FFF'}}>
+          Total Cases: {cases != 0 ? cases : 'Loading total cases...'}
         </Typography>
         <Link to='./cases'>
-        <button>test</button>
+          <button>test</button>
         </Link>
       </main>
     </div>

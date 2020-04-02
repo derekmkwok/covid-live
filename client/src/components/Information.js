@@ -40,20 +40,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Cases() {
+export default function Information() {
   const classes = useStyles();
-  console.log('Path ' + window.location.pathname)
-  console.log('Hostname ' + window.location.hostname)
-  console.log('protocol ' + window.location.protocol)
-  console.log('origin ' + window.location.origin)
-  console.log('Href ' + window.location.href)
 
   return (
     <div>
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Typography paragraph variant='h2' style={{color: '#FFF'}}>
-          Cases Page
+          Information page
         </Typography>
       </main>
     </div>

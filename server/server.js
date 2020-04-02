@@ -26,6 +26,6 @@ app.get('/country/all', data.getAllCountries);  // need this line above otherwis
 app.get('/country/:country', data.getCountry);
 
 
-const backendPort = 5000;
+const backendPort = process.env.PORT || 5000;
 
-app.listen(5000, () => console.log(`App running on port ${backendPort} - http://localhost:${backendPort}`));
+app.listen(backendPort, () => console.log(`App running on port ${backendPort} - http://localhost:${backendPort}`));

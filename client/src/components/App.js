@@ -8,14 +8,13 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 
-// Component import
+// Component imports
 import Home from './Home';
 import Cases from './Cases';
+import Charts from './Charts';
+import Information from './Information';
 
 // Font awesome icon imports
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -72,7 +71,7 @@ export default function PermanentDrawerLeft() {
         <CssBaseline />
         <AppBar position="fixed" className={classes.appBar} style={{backgroundColor:'#282c34'}}>
           <Toolbar>
-            <Typography variant="h6" noWrap style={{margin: 'auto'}}>
+            <Typography variant="h4" noWrap style={{margin: 'auto'}}>
             <FontAwesomeIcon icon={faLungsVirus} style={{marginRight: '10px'}}></FontAwesomeIcon>
               COVID-19 Live Tracker
             </Typography>
@@ -89,14 +88,6 @@ export default function PermanentDrawerLeft() {
           <div className={classes.toolbar} />
           <Divider />
           <List>
-            {/* {['Cases', 'Graphs', 'Information'].map((text, index) => (
-              <Link to='/cases' style={{ textDecoration: 'none' }}>
-                <ListItem button key={text}>
-                  <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItem>
-              </Link>
-            ))} */}
             <Link to='/' style={{ textDecoration: 'none' }}>
               <ListItem button key='Home'>
               <FontAwesomeIcon icon={faHouseUser} style={{marginRight: '25px'}} size='2x'></FontAwesomeIcon>
@@ -109,7 +100,7 @@ export default function PermanentDrawerLeft() {
               <ListItemText primary='Cases' />
               </ListItem>
             </Link>
-            <Link to='/graphs' style={{ textDecoration: 'none' }}>
+            <Link to='/charts' style={{ textDecoration: 'none' }}>
               <ListItem button key='Charts'>
               <FontAwesomeIcon icon={faChartBar} style={{marginRight: '25px', marginLeft: '2px'}} size='2x'></FontAwesomeIcon>
               <ListItemText primary='Charts' />
@@ -133,10 +124,10 @@ export default function PermanentDrawerLeft() {
             <Cases />
           </Route>
           <Route path="/charts" exact>
-            {/* <Users /> */}
+            <Charts />
           </Route>
           <Route path="/information" exact>
-            {/* <Home /> */}
+            <Information />
           </Route>
         </Switch>
       </div>
