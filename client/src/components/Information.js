@@ -2,14 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
-// React Router import
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -27,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: drawerWidth,
     backgroundColor: '#424242',
-    // borderColor: 'gray'
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
@@ -47,26 +38,24 @@ export default function Information() {
     <div>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Typography paragraph variant='body1' style={{color: '#FFF'}}>
-          <b>What is COVID-19?</b>
-          <br></br><br></br>
+        <Typography paragraph variant='h6' style={{color: '#FFF'}}>
+          <b><u>What is COVID-19?</u></b>
+          <br></br>
           COVID-19, also known as Coronavirus, is a highly infectious disease.
           There is currently no specific vaccine or treatment to this disease.
           It is important to protect yourself and others from infection through best practices and preventative measures.
-          <br></br><br></br><br></br>
-          <b>Best Practices:</b>
-          <ul>
-            <li>Wash hands with soap frequently</li>
-            <li>Use hand sanitizer</li>
-            <li>Do not touch face</li>
-            <li>Respiratory etiquette (cough into elbow)</li>
-            <li>Social distancing (at least 2m or 6ft apart)</li>
-          </ul>
+          Staying informed regarding facts about COVID-19 is also very important.
           <br></br><br></br>
-          <b>Resources and More Information:</b>
-          <ul>
-            <li><a href='https://www.who.int/health-topics/coronavirus'>World Health Organization</a></li>
-          </ul>
+          <b><u>Some Best Practices:</u></b>
+          {/* Using ul tag throws a warning error in console */}
+          <li style={{marginLeft: '40px'}}>Wash hands with soap frequently</li>
+          <li style={{marginLeft: '40px'}}>Use hand sanitizer</li>
+          <li style={{marginLeft: '40px'}}>Do not touch face</li>
+          <li style={{marginLeft: '40px'}}>Respiratory etiquette (cough into elbow)</li>
+          <li style={{marginLeft: '40px'}}>Social distancing (at least 2m or 6ft apart)</li>
+          <br></br>
+          <b><u>Resources and More Information:</u></b>
+          <li style={{marginLeft: '40px'}}><a href='https://www.who.int/health-topics/coronavirus'>World Health Organization</a></li>
         </Typography>
       </main>
     </div>

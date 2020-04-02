@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-
-// React Router import
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const drawerWidth = 240;
 
@@ -27,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: drawerWidth,
     backgroundColor: '#424242',
-    // borderColor: 'gray'
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
@@ -73,24 +65,24 @@ export default function Home() {
         {/* <Typography paragraph variant='h5' style={{color: '#FFF'}}>
           <b>Welcome to the COVID-19 Live Tracker Web Application</b>
         </Typography> */}
-        <Typography paragraph variant='h3' style={{color: 'tan', textDecoration: 'underline', margin: 'auto'}}>
+        <Typography paragraph variant='h3' style={{color: '#B0C4DE', textDecoration: 'underline', margin: 'auto'}}>
           Worldwide Statistics
         </Typography>
         <br></br>
         <Typography paragraph variant='h4' style={{color: '#6495ED'}}>
-          Total Cases: {cases != 0 ? cases : 'Loading...'}
+          Total Cases: {cases !== 0 ? cases : 'Loading...'}
         </Typography>
         <Typography paragraph variant='h4' style={{color: 'red'}}>
-          Deaths: {deaths != 0 ? deaths : 'Loading...'}
+          Deaths: {deaths !== 0 ? deaths : 'Loading...'}
         </Typography>
         <Typography paragraph variant='h4' style={{color: 'green'}}>
-          Recovered: {recovered != 0 ? recovered : 'Loading...'}
+          Recovered: {recovered !== 0 ? recovered : 'Loading...'}
         </Typography>
         <Typography paragraph variant='h4' style={{color: 'yellow'}}>
-          Active: {active != 0 ? active : 'Loading...'}
+          Active: {active !== 0 ? active : 'Loading...'}
         </Typography>
         <Typography paragraph variant='h4' style={{color: '#A9A9A9'}}>
-          Countries with Active Cases: {countries != 0 ? countries : 'Loading...'}
+          Countries with Active Cases: {countries !== 0 ? countries : 'Loading...'}
         </Typography>
       </main>
     </div>

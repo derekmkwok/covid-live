@@ -71,7 +71,7 @@ export default function PermanentDrawerLeft() {
         <CssBaseline />
         <AppBar position="fixed" className={classes.appBar} style={{backgroundColor:'#282c34'}}>
           <Toolbar>
-            <Typography variant="h3" noWrap style={{margin: 'auto', color: '#B0C4DE', fontWeight: 'bold'}}>
+            <Typography variant="h3" noWrap style={{margin: 'auto', color: '#F5FFFA'}}>
             <FontAwesomeIcon icon={faLungsVirus} style={{marginRight: '10px'}}></FontAwesomeIcon>
               COVID-19 Live Tracker
             </Typography>
