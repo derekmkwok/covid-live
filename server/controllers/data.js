@@ -11,6 +11,7 @@ const getAll = (req, res) => {
     .catch(err => console.log(`Error found: ${err}`))
 };
 
+// data for specific country
 const getCountry = (req, res) => {
   const country = req.params.country;
   console.log(country);
@@ -23,6 +24,7 @@ const getCountry = (req, res) => {
     .catch(err => console.log(`Error found: ${err}`))
 };
 
+// data for ALL countries in one array of objects
 const getAllCountries = (req, res) => {
   console.log('asdf');
   fetch('https://corona.lmao.ninja/countries?sort=country')

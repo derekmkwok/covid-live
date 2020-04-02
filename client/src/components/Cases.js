@@ -40,6 +40,7 @@ export default function Cases() {
   const [country, setCountry] = useState('');
   const [countries, setCountries] = useState([]);
 
+  // TODO: Change method of selection, too much data to load just for an array of countries
   useEffect(() => {
     // fetch(`${root}/all`)
     fetch(`http://localhost:5000/country/all`)

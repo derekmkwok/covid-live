@@ -1,8 +1,8 @@
 # COVID-19 Live Data Tracker App
 
 ## WORK IN PROGRESS (DEVELOPMENT STAGE)
-* Frontend - Just started
-* Backend - Basic routes working
+* Frontend - Started
+* Backend - Initial routes working
 * Planning to deploy once minimum viable product completed
 
 ## Technologies
@@ -16,7 +16,7 @@
 * A web application that tracks live updates of COVID-19/Coronavirus data
 * Node-Express used for the backend portion for logic and data processing after making API calls
 * React used for the frontend portion of this application
-* UI styled with Material UI and Font Awesome Icons
+* UI styled with Material-UI and Font Awesome Icons
 * Postman tool utilized for testing API calls
 * Features to be implemented:
   * Data regarding all cases

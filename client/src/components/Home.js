@@ -44,6 +44,7 @@ export default function Home() {
   const [active, setActive] = useState(0);
   const [countries, setCountries] = useState(0);
  
+  // TODO: Add datetime for when data is fetched and is latest?
   useEffect(() => {
     // fetch(`${root}/all`)
     fetch(`http://localhost:5000/all`)
