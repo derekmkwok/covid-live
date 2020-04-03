@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
+
+// Font-Awesome imports
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFlag } from '@fortawesome/free-solid-svg-icons';
+import { faChartLine } from '@fortawesome/free-solid-svg-icons';
 
 const drawerWidth = 240;
 
@@ -65,18 +69,9 @@ export default function Cases() {
   const [active, setActive] = useState(0);
   const [today, setToday] = useState(0);
 
-  // TODO: Change method of selection, too much data to load just for an array of countries
+  // TODO RENDER THE DATA ON THE PAGE
   useEffect(() => {
     // fetch(`${root}/all`)
-    // fetch(`http://localhost:5000/country/all`)
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     data.map(obj => {
-    //       // pushing all country object's 'country' (name) property into the array of countries
-    //       setCountries(oldArray => [...oldArray, obj['country']]);
-    //     })
-    //   })
-    //   .catch(err => console.log('Error fetching data'));
     fetch(`http://localhost:5000/country/${country}`)
       .then(response => response.json())
       .then(data => {
@@ -91,9 +86,7 @@ export default function Cases() {
   });
 
   const handleChange = (event) => {
-    console.log(event.target.value);
     setCountry(event.target.value); // setCountry is asnyc and triggers re-render, use useEffect for render changes
-    // console.log(country);  
   };
 
   return (
@@ -101,14 +94,15 @@ export default function Cases() {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Typography paragraph variant='h3' style={{color: '#B0C4DE', textDecoration: 'underline', margin: 'auto'}}>
+          <FontAwesomeIcon icon={faFlag} size='1x' style={{ marginRight: '20px' }}></FontAwesomeIcon>
           Country Statistics
+          <FontAwesomeIcon icon={faChartLine} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon>
         </Typography>
-        <Typography paragraph variant='h6' style={{color: '#FFF'}}>
+        <br></br>
+        <Typography paragraph variant='h5' style={{color: '#FFF'}}>
           Enter the name of a country below to get more information
         </Typography>
         <form className={classes.root} noValidate autoComplete="off">
-        {/* <TextField id="standard-basic" label="Standard" />
-        <TextField id="filled-basic" label="Filled" variant="filled" /> */}
         <TextField 
           id="outlined-basic" 
           label="Country" 

@@ -42,8 +42,6 @@ export default function Information() {
 
   return (
     <div>
-      {/* //import { faHandsWash } from '@fortawesome/free-solid-svg-icons';
-import { faUserMd } from '@fortawesome/free-solid-svg-icons'; */}
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Typography paragraph variant='h6' style={{color: '#FFF'}}>

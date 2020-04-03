@@ -1,8 +1,8 @@
 # COVID-19 Live Data Tracker App
 
 ## WORK IN PROGRESS (DEVELOPMENT STAGE)
-* Frontend - Started
-* Backend - Initial routes working
+* Frontend - Working on implementing front end to render data from initial API routes
+* Backend - Initial routes completed, will need to implement API routing for time series data
 * Planning to deploy once minimum viable product completed
 
 ## Technologies
