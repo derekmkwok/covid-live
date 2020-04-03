@@ -2,6 +2,12 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
+// Font-Awesome imports
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faViruses } from '@fortawesome/free-solid-svg-icons';
+import { faHandsWash } from '@fortawesome/free-solid-svg-icons';
+import { faUserMd } from '@fortawesome/free-solid-svg-icons';
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -36,17 +42,19 @@ export default function Information() {
 
   return (
     <div>
+      {/* //import { faHandsWash } from '@fortawesome/free-solid-svg-icons';
+import { faUserMd } from '@fortawesome/free-solid-svg-icons'; */}
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Typography paragraph variant='h6' style={{color: '#FFF'}}>
-          <b><u>What is COVID-19?</u></b>
+          <b><u>What is COVID-19?</u><FontAwesomeIcon icon={faViruses} size='2x' style={{ marginLeft: '10px', color: '#8B0000' }}></FontAwesomeIcon></b>
           <br></br>
           COVID-19, also known as Coronavirus, is a highly infectious disease.
           There is currently no specific vaccine or treatment to this disease.
           It is important to protect yourself and others from infection through best practices and preventative measures.
           Staying informed regarding facts about COVID-19 is also very important.
           <br></br><br></br>
-          <b><u>Some Best Practices:</u></b>
+          <b><u>Some Best Practices:</u><FontAwesomeIcon icon={faHandsWash} size='2x' style={{ marginLeft: '10px', color: '#6495ED' }}></FontAwesomeIcon></b>
           {/* Using ul tag throws a warning error in console */}
           <li style={{marginLeft: '40px'}}>Wash hands with soap frequently</li>
           <li style={{marginLeft: '40px'}}>Use hand sanitizer</li>
@@ -54,7 +62,7 @@ export default function Information() {
           <li style={{marginLeft: '40px'}}>Respiratory etiquette (cough into elbow)</li>
           <li style={{marginLeft: '40px'}}>Social distancing (at least 2m or 6ft apart)</li>
           <br></br>
-          <b><u>Resources and More Information:</u></b>
+          <b><u>Resources and More Information:</u><FontAwesomeIcon icon={faUserMd} size='2x' style={{ marginLeft: '10px', color: 'green' }}></FontAwesomeIcon></b>
           <li style={{marginLeft: '40px'}}><a href='https://www.who.int/health-topics/coronavirus'>World Health Organization</a></li>
         </Typography>
       </main>

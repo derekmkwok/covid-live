@@ -41,21 +41,23 @@ export default function Cases() {
   const [countries, setCountries] = useState([]);
 
   // TODO: Change method of selection, too much data to load just for an array of countries
-  useEffect(() => {
-    // fetch(`${root}/all`)
-    fetch(`http://localhost:5000/country/all`)
-      .then(response => response.json())
-      .then(data => {
-        data.map(obj => {
-          // pushing all country object's 'country' (name) property into the array of countries
-          setCountries(oldArray => [...oldArray, obj['country']]);
-        })
-      })
-      .catch(err => console.log('Error fetching data'));
-  });
+  // useEffect(() => {
+  //   // fetch(`${root}/all`)
+  //   fetch(`http://localhost:5000/country/all`)
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       data.map(obj => {
+  //         // pushing all country object's 'country' (name) property into the array of countries
+  //         setCountries(oldArray => [...oldArray, obj['country']]);
+  //       })
+  //     })
+  //     .catch(err => console.log('Error fetching data'));
+  // });
 
   const handleChange = (event) => {
+    console.log(event.target.value);
     setCountry(event.target.value);
+    console.log(country);  // set country is asnyc and triggers re-render
   };
 
   return (
@@ -68,7 +70,7 @@ export default function Cases() {
         <Typography paragraph variant='h6' style={{color: '#FFF'}}>
           Enter the name of a country below to get more information
         </Typography>
-        <form className={classes.root} noValidate autoComplete="off">
+        {/* <form className={classes.root} noValidate autoComplete="off">
           <TextField
             id="outlined-select-currency"
             select
@@ -84,7 +86,12 @@ export default function Cases() {
               </MenuItem>
             ))}
           </TextField>
-        </form>
+        </form> */}
+        <form className={classes.root} noValidate autoComplete="off">
+        {/* <TextField id="standard-basic" label="Standard" />
+        <TextField id="filled-basic" label="Filled" variant="filled" /> */}
+        <TextField id="outlined-basic" label="Country" onChange={handleChange} variant="outlined" />
+    </form>
       </main>
     </div>
   );

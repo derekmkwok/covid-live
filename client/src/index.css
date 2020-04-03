@@ -16,6 +16,8 @@ a {
   color: #FFF;
 }
 a:hover {
-   color: red;
+   /* color: red; */
+   /* color: #1E90FF; */
+   color: #FFD700;
 }
 
