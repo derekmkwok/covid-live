@@ -41,23 +41,24 @@ export default function Cases() {
   const [countries, setCountries] = useState([]);
 
   // TODO: Change method of selection, too much data to load just for an array of countries
-  // useEffect(() => {
-  //   // fetch(`${root}/all`)
-  //   fetch(`http://localhost:5000/country/all`)
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       data.map(obj => {
-  //         // pushing all country object's 'country' (name) property into the array of countries
-  //         setCountries(oldArray => [...oldArray, obj['country']]);
-  //       })
-  //     })
-  //     .catch(err => console.log('Error fetching data'));
-  // });
+  useEffect(() => {
+    // fetch(`${root}/all`)
+    // fetch(`http://localhost:5000/country/all`)
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     data.map(obj => {
+    //       // pushing all country object's 'country' (name) property into the array of countries
+    //       setCountries(oldArray => [...oldArray, obj['country']]);
+    //     })
+    //   })
+    //   .catch(err => console.log('Error fetching data'));
+    console.log(country);
+  });
 
   const handleChange = (event) => {
     console.log(event.target.value);
-    setCountry(event.target.value);
-    console.log(country);  // set country is asnyc and triggers re-render
+    setCountry(event.target.value); // setCountry is asnyc and triggers re-render, use useEffect for render changes
+    // console.log(country);  
   };
 
   return (

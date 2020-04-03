@@ -3,6 +3,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+// Font-Awesome imports
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGlobeAmericas } from '@fortawesome/free-solid-svg-icons';
+import { faChartLine } from '@fortawesome/free-solid-svg-icons';
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -63,11 +68,10 @@ export default function Home() {
     <div>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {/* <Typography paragraph variant='h5' style={{color: '#FFF'}}>
-          <b>Welcome to the COVID-19 Live Tracker Web Application</b>
-        </Typography> */}
         <Typography paragraph variant='h3' style={{color: '#B0C4DE', textDecoration: 'underline', margin: 'auto'}}>
+          <FontAwesomeIcon icon={faGlobeAmericas} size='1x' style={{ marginRight: '20px' }}></FontAwesomeIcon>
           Worldwide Statistics
+          <FontAwesomeIcon icon={faChartLine} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon>
         </Typography>
         <br></br>
         <Typography paragraph variant='h4' style={{color: '#6495ED'}}>
