@@ -31,6 +31,27 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
     height: '100%'
   },
+  notchedOutline: {
+    borderColor: '#FFF'
+  },
+  label: {
+    color: '#FFF',
+    "&.Mui-focused": {
+      color: "#FFF"
+    }
+  },
+  focus: {
+    borderColor: '#FFF',
+  },
+  outlinedInput: {
+    '&$focus $notchedOutline': {
+      borderColor: '#FFF',
+      color: '#FFF'
+    },
+    "&:hover:not($disabled):not($focused):not($error) $notchedOutline": {
+      borderColor: '#FFD700'
+    }
+  },
 }));
 
 export default function Cases() {
@@ -38,7 +59,11 @@ export default function Cases() {
 
   // hooks
   const [country, setCountry] = useState('');
-  const [countries, setCountries] = useState([]);
+  const [cases, setCases] = useState(0);
+  const [deaths, setDeaths] = useState(0);
+  const [recovered, setRecovered] = useState(0);
+  const [active, setActive] = useState(0);
+  const [today, setToday] = useState(0);
 
   // TODO: Change method of selection, too much data to load just for an array of countries
   useEffect(() => {
@@ -52,7 +77,17 @@ export default function Cases() {
     //     })
     //   })
     //   .catch(err => console.log('Error fetching data'));
-    console.log(country);
+    fetch(`http://localhost:5000/country/${country}`)
+      .then(response => response.json())
+      .then(data => {
+        setCases(data['cases']);
+        setDeaths(data['deaths']);
+        setRecovered(data['recovered']);
+        setActive(data['active']);
+        setToday(data['todayCases']);
+      })
+      .then(() => console.log(cases))
+      .catch(err => console.log('Error fetching data'));
   });
 
   const handleChange = (event) => {
@@ -71,27 +106,29 @@ export default function Cases() {
         <Typography paragraph variant='h6' style={{color: '#FFF'}}>
           Enter the name of a country below to get more information
         </Typography>
-        {/* <form className={classes.root} noValidate autoComplete="off">
-          <TextField
-            id="outlined-select-currency"
-            select
-            label="Select"
-            value={country}
-            onChange={handleChange}
-            helperText="Please select country"
-            variant="outlined"
-          >
-            {countries.map((country) => (
-              <MenuItem key={country} value={country}>
-                {country}
-              </MenuItem>
-            ))}
-          </TextField>
-        </form> */}
         <form className={classes.root} noValidate autoComplete="off">
         {/* <TextField id="standard-basic" label="Standard" />
         <TextField id="filled-basic" label="Filled" variant="filled" /> */}
-        <TextField id="outlined-basic" label="Country" onChange={handleChange} variant="outlined" />
+        <TextField 
+          id="outlined-basic" 
+          label="Country" 
+          onChange={handleChange} 
+          variant="outlined" 
+          InputLabelProps={{
+            classes: {
+              root: classes.label,
+              focused: classes.focus,
+            },
+          }}
+          InputProps={{
+            style: {color: '#FFF'},
+            classes: {
+              root: classes.outlinedInput,
+              focused: classes.focus,
+              notchedOutline: classes.notchedOutline
+            }
+          }} 
+        />
     </form>
       </main>
     </div>
