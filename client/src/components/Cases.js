@@ -144,6 +144,8 @@ export default function Cases() {
     setCountry(event.target.value); // setCountry is asnyc, triggers re-render, use useEffect for render changes
   };
 
+  // TO DO: BETTER STYLING
+
   return (
     <div>
       <main className={classes.content}>

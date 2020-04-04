@@ -64,6 +64,8 @@ export default function Home() {
       .catch(err => console.log('Error fetching data'));
   });
 
+  // TO DO UPDATE HOME PAGE, MOVED STATS TO CASES PAGE, ADD ABOUT?
+
   return (
     <div>
       <main className={classes.content}>

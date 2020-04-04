@@ -19,7 +19,7 @@
 * UI styled with Material-UI and Font Awesome Icons
 * Postman tool utilized for testing API calls
 * Features to be implemented:
-  * Data regarding all cases
-  * Data filtered by country
+  * Data regarding all cases - DONE
+  * Data filtered by country - DONE
   * Time series data visualized
   * Information/resources regarding COVID-19 and where/how to seek help
