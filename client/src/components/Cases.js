@@ -7,6 +7,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 // Font-Awesome imports
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFlag } from '@fortawesome/free-solid-svg-icons';
+import { faGlobeAmericas } from '@fortawesome/free-solid-svg-icons';
 import { faChartLine } from '@fortawesome/free-solid-svg-icons';
 
 const drawerWidth = 240;
@@ -98,13 +99,7 @@ export default function Cases() {
   // re-rendering for every country change
   useEffect(() => {
     // fetch(`${root}/all`)
-    let query;
-    if (country.toLowerCase() === 'world') {
-      query = 'all';
-    } else {
-      query = 'country' + '/' + country;
-    }
-    fetch(`http://localhost:5000/${query}`)
+    fetch(`http://localhost:5000/country/${country}`)
     .then(response => response.json())
     .then(data => {
       // if country data exists, set all values
@@ -124,17 +119,13 @@ export default function Cases() {
     .then(() => {
       console.log(cases);
     })
-    .catch(err => console.log('Error fetching data'));
+    .catch(err => {
+      setLoaded(false);
+      console.log('Error fetching data');
+    });
   }, [country]);
 
   const handleChange = (event) => {
-    // setCases(-1);
-    // setDeaths(-1);
-    // setRecovered(-1);
-    // setActive(-1);
-    // setToday(-1);
-    // setTodayDeaths(-1);
-    // setCritical(-1);
     setCountry(event.target.value); // setCountry is asnyc, triggers re-render, use useEffect for render changes
   };
 
@@ -142,6 +133,28 @@ export default function Cases() {
     <div>
       <main className={classes.content}>
         <div className={classes.toolbar} />
+        <Typography paragraph variant='h3' style={{color: '#B0C4DE', textDecoration: 'underline', margin: 'auto'}}>
+          <FontAwesomeIcon icon={faGlobeAmericas} size='1x' style={{ marginRight: '20px' }}></FontAwesomeIcon>
+          Worldwide Statistics
+          <FontAwesomeIcon icon={faChartLine} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon>
+        </Typography>
+        <br></br>
+        <Typography paragraph variant='h4' style={{color: '#6495ED'}}>
+          Total Cases: {allCases}
+        </Typography>
+        <Typography paragraph variant='h4' style={{color: 'red'}}>
+          Deaths: {allDeaths}
+        </Typography>
+        <Typography paragraph variant='h4' style={{color: 'green'}}>
+          Recovered: {allRecovered}
+        </Typography>
+        <Typography paragraph variant='h4' style={{color: 'yellow'}}>
+          Active: {allActive}
+        </Typography>
+        <Typography paragraph variant='h4' style={{color: '#A9A9A9'}}>
+          Countries with Active Cases: {allCountries}
+        </Typography>
+        <br></br>
         <Typography paragraph variant='h3' style={{color: '#B0C4DE', textDecoration: 'underline', margin: 'auto'}}>
           <FontAwesomeIcon icon={faFlag} size='1x' style={{ marginRight: '20px' }}></FontAwesomeIcon>
           Country Statistics
