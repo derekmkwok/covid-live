@@ -3,6 +3,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
 // Font-Awesome imports
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -58,6 +65,10 @@ const useStyles = makeStyles((theme) => ({
       borderColor: '#FFD700'
     }
   },
+  table: {
+    minWidth: 650,
+    backgroundColor: '#282c34',
+  },
 }));
 
 export default function Cases() {
@@ -69,6 +80,7 @@ export default function Cases() {
   const [allRecovered, setAllRecovered] = useState(-1);
   const [allActive, setAllActive] = useState(-1);
   const [allCountries, setAllCountries] = useState(-1);
+  const [allLoaded, setAllLoaded] = useState(false);
 
   // country hooks
   const [country, setCountry] = useState('');
@@ -92,8 +104,11 @@ export default function Cases() {
         setAllRecovered(data['recovered']);
         setAllActive(data['active']);
         setAllCountries(data['affectedCountries']);
+        setAllLoaded(true);
       })
-      .catch(err => console.log('Error fetching data'));
+      .catch(err => {
+        console.log('Error fetching data');
+      });
   }, []);
 
   // re-rendering for every country change
@@ -133,29 +148,56 @@ export default function Cases() {
     <div>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Typography paragraph variant='h3' style={{color: '#B0C4DE', textDecoration: 'underline', margin: 'auto'}}>
+        <Typography paragraph variant='h3' style={{color: '#F5F5F5', textDecoration: 'underline', margin: 'auto'}}>
           <FontAwesomeIcon icon={faGlobeAmericas} size='1x' style={{ marginRight: '20px' }}></FontAwesomeIcon>
           Worldwide Statistics
           <FontAwesomeIcon icon={faChartLine} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon>
         </Typography>
         <br></br>
-        <Typography paragraph variant='h4' style={{color: '#6495ED'}}>
-          Total Cases: {allCases}
-        </Typography>
-        <Typography paragraph variant='h4' style={{color: 'red'}}>
-          Deaths: {allDeaths}
-        </Typography>
-        <Typography paragraph variant='h4' style={{color: 'green'}}>
-          Recovered: {allRecovered}
-        </Typography>
-        <Typography paragraph variant='h4' style={{color: 'yellow'}}>
-          Active: {allActive}
-        </Typography>
-        <Typography paragraph variant='h4' style={{color: '#A9A9A9'}}>
-          Countries with Active Cases: {allCountries}
-        </Typography>
-        <br></br>
-        <Typography paragraph variant='h3' style={{color: '#B0C4DE', textDecoration: 'underline', margin: 'auto'}}>
+        <TableContainer component={Paper} style={{borderColor:'#FFF'}}>
+          <Table style={{border: '1px solid #FFF'}} className={classes.table} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell align='center' style={{color:'#FFF', border:'1px solid #FFF', fontSize:'21px'}}>
+                  Cases
+                </TableCell>
+                <TableCell align='center' style={{color:'#FFF', border:'1px solid #FFF', fontSize:'21px'}}>
+                  Deaths
+                </TableCell>
+                <TableCell align='center' style={{color:'#FFF', border:'1px solid #FFF', fontSize:'21px'}}>
+                  Recovered
+                </TableCell>
+                <TableCell align='center' style={{color:'#FFF', border:'1px solid #FFF', fontSize:'21px'}}>
+                  Active
+                </TableCell>
+                <TableCell align='center' style={{color:'#FFF', border:'1px solid #FFF', fontSize:'21px'}}>
+                  Countries
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                <TableCell align='center' style={{color:'#FFA500', border:'1px solid #FFF', fontSize:'21px'}}>
+                  {allLoaded ? allCases : <CircularProgress color='secondary' />}
+                </TableCell>
+                <TableCell align='center' style={{color:'red', border:'1px solid #FFF', fontSize:'21px'}}>
+                  {allLoaded ? allDeaths : <CircularProgress color='secondary' />}
+                </TableCell>
+                <TableCell align='center' style={{color:'#228B22', border:'1px solid #FFF', fontSize:'21px'}}>
+                  {allLoaded ? allRecovered : <CircularProgress color='secondary' />}
+                </TableCell>
+                <TableCell align='center' style={{color:'#FFFF00', border:'1px solid #FFF', fontSize:'21px'}}>
+                  {allLoaded ? allActive : <CircularProgress color='secondary' />}
+                </TableCell>
+                <TableCell align='center' style={{color:'#A9A9A9', border:'1px solid #FFF', fontSize:'21px'}}>
+                  {allLoaded ? allCountries : <CircularProgress color='secondary' />}
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <br></br><br></br>
+        <Typography paragraph variant='h3' style={{color: '#F5F5F5', textDecoration: 'underline', margin: 'auto'}}>
           <FontAwesomeIcon icon={faFlag} size='1x' style={{ marginRight: '20px' }}></FontAwesomeIcon>
           Country Statistics
           <FontAwesomeIcon icon={faChartLine} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon>
@@ -188,7 +230,61 @@ export default function Cases() {
           { !loaded ? <CircularProgress style={{ marginLeft: '25px', marginTop: '6px'}} /> : ''}
         </form>
         <br></br>
-        { loaded ? 
+        <TableContainer component={Paper} style={{borderColor:'#FFF'}}>
+          <Table style={{border: '1px solid #FFF'}} className={classes.table} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell align='center' style={{color:'#FFF', border:'1px solid #FFF', fontSize:'21px'}}>
+                  Cases
+                </TableCell>
+                <TableCell align='center' style={{color:'#FFF', border:'1px solid #FFF', fontSize:'21px'}}>
+                  Deaths
+                </TableCell>
+                <TableCell align='center' style={{color:'#FFF', border:'1px solid #FFF', fontSize:'21px'}}>
+                  Recovered
+                </TableCell>
+                <TableCell align='center' style={{color:'#FFF', border:'1px solid #FFF', fontSize:'21px'}}>
+                  Active
+                </TableCell>
+                <TableCell align='center' style={{color:'#FFF', border:'1px solid #FFF', fontSize:'21px'}}>
+                  Cases Today
+                </TableCell>
+                <TableCell align='center' style={{color:'#FFF', border:'1px solid #FFF', fontSize:'21px'}}>
+                  Deaths Today
+                </TableCell>
+                <TableCell align='center' style={{color:'#FFF', border:'1px solid #FFF', fontSize:'21px'}}>
+                  Critical Condition
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                <TableCell align='center' style={{color:'#FFA500', border:'1px solid #FFF', fontSize:'21px'}}>
+                  {loaded ? cases : <CircularProgress color='secondary' />}
+                </TableCell>
+                <TableCell align='center' style={{color:'red', border:'1px solid #FFF', fontSize:'21px'}}>
+                  {loaded ? deaths : <CircularProgress color='secondary' />}
+                </TableCell>
+                <TableCell align='center' style={{color:'#228B22', border:'1px solid #FFF', fontSize:'21px'}}>
+                  {loaded ? recovered : <CircularProgress color='secondary' />}
+                </TableCell>
+                <TableCell align='center' style={{color:'#FFFF00', border:'1px solid #FFF', fontSize:'21px'}}>
+                  {loaded ? active : <CircularProgress color='secondary' />}
+                </TableCell>
+                <TableCell align='center' style={{color:'#FFA500', border:'1px solid #FFF', fontSize:'21px'}}>
+                  {loaded ? today : <CircularProgress color='secondary' />}
+                </TableCell>
+                <TableCell align='center' style={{color:'red', border:'1px solid #FFF', fontSize:'21px'}}>
+                  {loaded ? todayDeaths : <CircularProgress color='secondary' />}
+                </TableCell>
+                <TableCell align='center' style={{color:'#FF6347', border:'1px solid #FFF', fontSize:'21px'}}>
+                  {loaded ? critical : <CircularProgress color='secondary' />}
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+        {/* { loaded ? 
           <React.Fragment>
             <Typography paragraph variant='h4' style={{color: '#6495ED'}}>
               Total Cases: {cases}
@@ -214,7 +310,7 @@ export default function Cases() {
           </React.Fragment>
           :
           ''
-        }
+        } */}
       </main>
     </div>
   );
