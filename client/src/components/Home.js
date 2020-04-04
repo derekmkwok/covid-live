@@ -7,6 +7,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGlobeAmericas } from '@fortawesome/free-solid-svg-icons';
 import { faChartLine } from '@fortawesome/free-solid-svg-icons';
+import { faLaptopHouse} from '@fortawesome/free-solid-svg-icons';
 
 const drawerWidth = 240;
 
@@ -70,26 +71,22 @@ export default function Home() {
     <div>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Typography paragraph variant='h3' style={{color: '#B0C4DE', textDecoration: 'underline', margin: 'auto'}}>
-          <FontAwesomeIcon icon={faGlobeAmericas} size='1x' style={{ marginRight: '20px' }}></FontAwesomeIcon>
-          Worldwide Statistics
-          <FontAwesomeIcon icon={faChartLine} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon>
+        <Typography paragraph variant='h3' style={{color: '#ADD8E6', margin: 'auto', fontWeight: 'bold'}}>
+          Welcome!
+          <FontAwesomeIcon icon={faLaptopHouse} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon>
         </Typography>
         <br></br>
-        <Typography paragraph variant='h4' style={{color: '#6495ED'}}>
-          Total Cases: {cases !== 0 ? cases : 'Loading...'}
+        <Typography paragraph variant='h6' style={{color: '#6495ED'}}>
+          The navigation bar can be found on the left.<br></br>Please select:
         </Typography>
-        <Typography paragraph variant='h4' style={{color: 'red'}}>
-          Deaths: {deaths !== 0 ? deaths : 'Loading...'}
+        <Typography paragraph variant='h6' style={{color: '#B0C4DE'}}>
+          <b>Cases</b> - COVID-19 statistics worldwide or filtered by country
         </Typography>
-        <Typography paragraph variant='h4' style={{color: 'green'}}>
-          Recovered: {recovered !== 0 ? recovered : 'Loading...'}
+        <Typography paragraph variant='h6' style={{color: '#B0C4DE'}}>
+          <b>Charts</b> - Visualized charts/graphs of COVID-19 data
         </Typography>
-        <Typography paragraph variant='h4' style={{color: 'yellow'}}>
-          Active: {active !== 0 ? active : 'Loading...'}
-        </Typography>
-        <Typography paragraph variant='h4' style={{color: '#A9A9A9'}}>
-          Countries with Active Cases: {countries !== 0 ? countries : 'Loading...'}
+        <Typography paragraph variant='h6' style={{color: '#B0C4DE'}}>
+          <b>Information</b> - Resources and information regarding COVID-19
         </Typography>
       </main>
     </div>

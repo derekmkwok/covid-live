@@ -10,6 +10,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 
 // Font-Awesome imports
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -45,24 +46,24 @@ const useStyles = makeStyles((theme) => ({
     height: '100%'
   },
   notchedOutline: {
-    borderColor: '#FFF'
+    borderColor: 'orange'
   },
   label: {
-    color: '#FFF',
+    color: 'orange',
     "&.Mui-focused": {
-      color: "#FFF"
+      color: "orange"
     }
   },
   focus: {
-    borderColor: '#FFF',
+    borderColor: '#6495ED',
   },
   outlinedInput: {
     '&$focus $notchedOutline': {
-      borderColor: '#FFF',
-      color: '#FFF'
+      borderColor: 'orange',
+      color: 'orange'
     },
     "&:hover:not($disabled):not($focused):not($error) $notchedOutline": {
-      borderColor: '#FFD700'
+      borderColor: 'orange'
     }
   },
   table: {
@@ -144,75 +145,80 @@ export default function Cases() {
     setCountry(event.target.value); // setCountry is asnyc, triggers re-render, use useEffect for render changes
   };
 
+  // const handleSubmit = (event) => {
+  //   setCountry(event.target.value); // setCountry is asnyc, triggers re-render, use useEffect for render changes
+  // };
+
   // TO DO: BETTER STYLING
 
   return (
     <div>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Typography paragraph variant='h4' style={{color: '#FFD700', textDecoration: 'underline', margin: 'auto', fontWeight: 'bold'}}>
+        <Typography paragraph variant='h4' style={{color: '#ADD8E6', textDecoration: 'underline', margin: 'auto', fontWeight: 'bold'}}>
           <FontAwesomeIcon icon={faGlobeAmericas} size='1x' style={{ marginRight: '20px' }}></FontAwesomeIcon>
             Worldwide Statistics
           <FontAwesomeIcon icon={faChartLine} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon>
         </Typography>
         <br></br>
-        <TableContainer component={Paper} style={{borderColor:'#FFF'}}>
-          <Table style={{border: '1px solid #FFF'}} className={classes.table} aria-label="simple table">
+        <TableContainer component={Paper} style={{borderColor:'#B0C4DE'}}>
+          <Table style={{border: '1px solid #B0C4DE'}} className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell align='center' style={{color:'#FFF', border:'1px solid #FFF', fontSize:'18px', fontWeight:'bold'}}>
+                <TableCell align='center' style={{color:'#B0C4DE', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
                   Cases
                 </TableCell>
-                <TableCell align='center' style={{color:'#FFF', border:'1px solid #FFF', fontSize:'18px', fontWeight:'bold'}}>
+                <TableCell align='center' style={{color:'#B0C4DE', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
                   Deaths
                 </TableCell>
-                <TableCell align='center' style={{color:'#FFF', border:'1px solid #FFF', fontSize:'18px', fontWeight:'bold'}}>
+                <TableCell align='center' style={{color:'#B0C4DE', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
                   Recovered
                 </TableCell>
-                <TableCell align='center' style={{color:'#FFF', border:'1px solid #FFF', fontSize:'18px', fontWeight:'bold'}}>
+                <TableCell align='center' style={{color:'#B0C4DE', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
                   Active
                 </TableCell>
-                <TableCell align='center' style={{color:'#FFF', border:'1px solid #FFF', fontSize:'18px', fontWeight:'bold'}}>
-                  Countries
+                <TableCell align='center' style={{color:'#B0C4DE', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
+                  Countries Affected
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableCell align='center' style={{color:'#FFA500', border:'1px solid #FFF', fontSize:'18px', fontWeight:'bold'}}>
+                <TableCell align='center' style={{color:'#FFA500', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
                   {allLoaded ? allCases : <CircularProgress color='secondary' />}
                 </TableCell>
-                <TableCell align='center' style={{color:'red', border:'1px solid #FFF', fontSize:'18px', fontWeight:'bold'}}>
+                <TableCell align='center' style={{color:'red', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
                   {allLoaded ? allDeaths : <CircularProgress color='secondary' />}
                 </TableCell>
-                <TableCell align='center' style={{color:'#228B22', border:'1px solid #FFF', fontSize:'18px', fontWeight:'bold'}}>
+                <TableCell align='center' style={{color:'#228B22', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
                   {allLoaded ? allRecovered : <CircularProgress color='secondary' />}
                 </TableCell>
-                <TableCell align='center' style={{color:'#FFFF00', border:'1px solid #FFF', fontSize:'18px', fontWeight:'bold'}}>
+                <TableCell align='center' style={{color:'#FFFF00', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
                   {allLoaded ? allActive : <CircularProgress color='secondary' />}
                 </TableCell>
-                <TableCell align='center' style={{color:'#A9A9A9', border:'1px solid #FFF', fontSize:'18px', fontWeight:'bold'}}>
+                <TableCell align='center' style={{color:'#A9A9A9', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
                   {allLoaded ? allCountries : <CircularProgress color='secondary' />}
                 </TableCell>
               </TableRow>
             </TableBody>
           </Table>
         </TableContainer>
-        <br></br><br></br>
-        <Typography paragraph variant='h4' style={{color: '#FFD700', textDecoration: 'underline', margin: 'auto', fontWeight: 'bold'}}>
+        <br></br><br></br><br></br><br></br>
+        <Typography paragraph variant='h4' style={{color: '#ADD8E6', textDecoration: 'underline', margin: 'auto', fontWeight: 'bold'}}>
           <FontAwesomeIcon icon={faFlag} size='1x' style={{ marginRight: '20px' }}></FontAwesomeIcon>
             Country Statistics
           <FontAwesomeIcon icon={faChartLine} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon>
         </Typography>
         <br></br>
-        <Typography paragraph variant='h6' style={{color: '#FFF'}}>
-          Enter the name of a country below to get more information
+        <Typography paragraph variant='h6' style={{color: '#6495ED'}}>
+          Enter the name of a country below to get more information:
         </Typography>
         <form className={classes.root} noValidate autoComplete="off">
           <TextField 
             id="outlined-basic" 
-            label="Country" 
+            label="Enter Country Here" 
             onChange={handleChange} 
+            // onSubmit={handleSubmit}
             variant="outlined" 
             InputLabelProps={{
               classes: {
@@ -221,7 +227,7 @@ export default function Cases() {
               },
             }}
             InputProps={{
-              style: {color: '#FFF'},
+              style: {color: '#6495ED'},
               classes: {
                 root: classes.outlinedInput,
                 focused: classes.focus,
@@ -229,57 +235,65 @@ export default function Cases() {
               }
             }} 
           />
+          {/* <Button
+            type="submit"
+            variant="outlined"
+            color="primary"
+            className={classes.button}
+          >
+            Search
+          </Button> */}
           {/* { !loaded ? <CircularProgress style={{ marginLeft: '25px', marginTop: '6px'}} /> : ''} */}
         </form>
         <br></br>
-        <TableContainer component={Paper} style={{borderColor:'#FFF'}}>
-          <Table style={{border: '1px solid #FFF'}} className={classes.table} aria-label="simple table">
+        <TableContainer component={Paper} style={{borderColor:'#B0C4DE'}}>
+          <Table style={{border: '1px solid #B0C4DE'}} className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell align='center' style={{color:'#FFF', border:'1px solid #FFF', fontSize:'18px', fontWeight:'bold'}}>
+                <TableCell align='center' style={{color:'#B0C4DE', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
                   Cases
                 </TableCell>
-                <TableCell align='center' style={{color:'#FFF', border:'1px solid #FFF', fontSize:'18px', fontWeight:'bold'}}>
+                <TableCell align='center' style={{color:'#B0C4DE', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
                   Deaths
                 </TableCell>
-                <TableCell align='center' style={{color:'#FFF', border:'1px solid #FFF', fontSize:'18px', fontWeight:'bold'}}>
+                <TableCell align='center' style={{color:'#B0C4DE', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
                   Recovered
                 </TableCell>
-                <TableCell align='center' style={{color:'#FFF', border:'1px solid #FFF', fontSize:'18px', fontWeight:'bold'}}>
+                <TableCell align='center' style={{color:'#B0C4DE', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
                   Active
                 </TableCell>
-                <TableCell align='center' style={{color:'#FFF', border:'1px solid #FFF', fontSize:'18px', fontWeight:'bold'}}>
+                <TableCell align='center' style={{color:'#B0C4DE', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
                   Cases Today
                 </TableCell>
-                <TableCell align='center' style={{color:'#FFF', border:'1px solid #FFF', fontSize:'18px', fontWeight:'bold'}}>
+                <TableCell align='center' style={{color:'#B0C4DE', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
                   Deaths Today
                 </TableCell>
-                <TableCell align='center' style={{color:'#FFF', border:'1px solid #FFF', fontSize:'18px', fontWeight:'bold'}}>
+                <TableCell align='center' style={{color:'#B0C4DE', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
                   Critical Condition
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableCell align='center' style={{color:'#FFA500', border:'1px solid #FFF', fontSize:'18px', fontWeight:'bold'}}>
+                <TableCell align='center' style={{color:'#FFA500', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
                   {loaded ? cases : <CircularProgress color='secondary' />}
                 </TableCell>
-                <TableCell align='center' style={{color:'red', border:'1px solid #FFF', fontSize:'18px', fontWeight:'bold'}}>
+                <TableCell align='center' style={{color:'red', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
                   {loaded ? deaths : <CircularProgress color='secondary' />}
                 </TableCell>
-                <TableCell align='center' style={{color:'#228B22', border:'1px solid #FFF', fontSize:'18px', fontWeight:'bold'}}>
+                <TableCell align='center' style={{color:'#228B22', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
                   {loaded ? recovered : <CircularProgress color='secondary' />}
                 </TableCell>
-                <TableCell align='center' style={{color:'#FFFF00', border:'1px solid #FFF', fontSize:'18px', fontWeight:'bold'}}>
+                <TableCell align='center' style={{color:'#FFFF00', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
                   {loaded ? active : <CircularProgress color='secondary' />}
                 </TableCell>
-                <TableCell align='center' style={{color:'#FFA500', border:'1px solid #FFF', fontSize:'18px', fontWeight:'bold'}}>
+                <TableCell align='center' style={{color:'#FFA500', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
                   {loaded ? today : <CircularProgress color='secondary' />}
                 </TableCell>
-                <TableCell align='center' style={{color:'red', border:'1px solid #FFF', fontSize:'18px', fontWeight:'bold'}}>
+                <TableCell align='center' style={{color:'red', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
                   {loaded ? todayDeaths : <CircularProgress color='secondary' />}
                 </TableCell>
-                <TableCell align='center' style={{color:'#FF6347', border:'1px solid #FFF', fontSize:'18px', fontWeight:'bold'}}>
+                <TableCell align='center' style={{color:'#FF6347', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
                   {loaded ? critical : <CircularProgress color='secondary' />}
                 </TableCell>
               </TableRow>

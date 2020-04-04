@@ -76,7 +76,7 @@ export default function PermanentDrawerLeft() {
         <AppBar position="fixed" className={classes.appBar} style={{backgroundColor:'#282c34'}}>
           <Toolbar>
             <Typography variant="h3" noWrap style={{margin: 'auto', color: '#FFD700', fontWeight: 'bold'}}>
-            <FontAwesomeIcon icon={faLungsVirus} style={{marginRight: '10px'}}></FontAwesomeIcon>
+              <FontAwesomeIcon icon={faLungsVirus} style={{marginRight: '10px'}}></FontAwesomeIcon>
               COVID-19 Live Tracker
             </Typography>
           </Toolbar>
