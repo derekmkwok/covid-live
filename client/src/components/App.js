@@ -48,8 +48,9 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
-    backgroundColor: '#424242',
-    borderColor: '#292929'
+    // backgroundColor: '#424242',
+    backgroundColor: '#252525',
+    borderColor: '#F5F5F5'
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
@@ -60,6 +61,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
     height: '100%'
   },
+  dividerColor: {
+    backgroundColor: '#171717'
+  }
 }));
 
 export default function PermanentDrawerLeft() {
@@ -86,7 +90,7 @@ export default function PermanentDrawerLeft() {
           anchor="left"
         >
           <div className={classes.toolbar} />
-          <Divider />
+          <Divider className={classes.dividerColor} />
           <List>
             <Link to='/' style={{ textDecoration: 'none' }}>
               <ListItem button key='Home'>
@@ -113,7 +117,7 @@ export default function PermanentDrawerLeft() {
               </ListItem>
             </Link>
           </List>
-          <Divider />
+          <Divider className={classes.dividerColor} />
         </Drawer>        
 
         <Switch>
