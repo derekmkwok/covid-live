@@ -9,6 +9,7 @@ const cors = require('cors');  // cross origin resource sharing to allow for dif
 const helmet = require('helmet');  // security
 const morgan = require('morgan');  // logging
 
+// controllers
 const data = require('./controllers/data');
 
 const app = express();
@@ -24,7 +25,7 @@ app.get('/', (req, res) => res.send('Hello World!'));
 app.get('/all', data.getAll);
 app.get('/country/all', data.getAllCountries);  // need this line above otherwise 'all' is considered a parameter
 app.get('/country/:country', data.getCountry);
-
+app.get('/time', )
 
 const backendPort = process.env.PORT || 5000;
 

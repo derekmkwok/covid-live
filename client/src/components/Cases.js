@@ -10,7 +10,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
 
 // Font-Awesome imports
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -145,10 +144,6 @@ export default function Cases() {
     setCountry(event.target.value); // setCountry is asnyc, triggers re-render, use useEffect for render changes
   };
 
-  // const handleSubmit = (event) => {
-  //   setCountry(event.target.value); // setCountry is asnyc, triggers re-render, use useEffect for render changes
-  // };
-
   // TO DO: BETTER STYLING
 
   return (
@@ -218,7 +213,6 @@ export default function Cases() {
             id="outlined-basic" 
             label="Enter Country Here" 
             onChange={handleChange} 
-            // onSubmit={handleSubmit}
             variant="outlined" 
             InputLabelProps={{
               classes: {
@@ -235,14 +229,6 @@ export default function Cases() {
               }
             }} 
           />
-          {/* <Button
-            type="submit"
-            variant="outlined"
-            color="primary"
-            className={classes.button}
-          >
-            Search
-          </Button> */}
           {/* { !loaded ? <CircularProgress style={{ marginLeft: '25px', marginTop: '6px'}} /> : ''} */}
         </form>
         <br></br>
