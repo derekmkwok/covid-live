@@ -11,6 +11,7 @@ const morgan = require('morgan');  // logging
 
 // controllers
 const data = require('./controllers/data');
+const time = require('./controllers/time');
 
 const app = express();
 const frontendPort = 3000;
