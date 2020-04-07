@@ -35,16 +35,27 @@ export default function Charts() {
   const classes = useStyles();
 
   // hooks
-  const [country, setCountry] = useState(null);
+  const [country, setCountry] = useState('canada');
   const [allData, setAllData] = useState([]);
+  const [cache, setCache] = useState({});  // local cache to store previously searched arrays of time series data
 
-  // initial render
+  // every time country changes
   useEffect(() => {
-    // fetch(`${root}/all`)
-    fetch(`http://localhost:5000/time/${'CANADA'}`)
+    setCountry(country.toLowerCase());
+    if (cache[country.toLowerCase()] !== undefined) {
+      // exists in cache - use cached data
+      setAllData(cache[country.toLowerCase()]);
+    } else {
+      // fetch(`${root}/all`)
+      fetch(`http://localhost:5000/time/${'CANADA'}`)
       .then(response => response.json())
       .then(data => {
-        setAllData(prev => [...prev,...data]);
+        // setAllData(prev => [...prev,...data]);
+        setAllData(data);
+        setCache(prev => {
+          return {...prev, [country]:data}
+        });
+        // setAllData(allData.concat(data));
         // setAllLoaded(true);
         console.log(data);
       })
@@ -52,7 +63,14 @@ export default function Charts() {
       .catch(err => {
         console.log('Error fetching data');
       });
+    }
   }, [country]);
+
+  // testing if data really was received and changed state of data
+  const onClick = (event) => {
+    console.log(allData);
+    console.log(cache);
+  }
 
   return (
     <div>
@@ -62,6 +80,7 @@ export default function Charts() {
           TO BE ADDED
         </Typography>
         {/* {allData} */}
+        <button onClick={onClick}>CLICK</button>
       </main>
     </div>
   );
