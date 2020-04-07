@@ -6,7 +6,9 @@ const getTime = (req, res) => {
     .then(response => response.json())
     .then(data => {
       // decide if data storage/processing done in backend/frontend
+      res.send(data);
     })
+    .catch(err => console.log(`Error found: ${err}`));
 };
 
 // const getTimeCountry (to be implemented?)

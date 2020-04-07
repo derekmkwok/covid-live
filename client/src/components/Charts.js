@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
@@ -34,6 +34,25 @@ const useStyles = makeStyles((theme) => ({
 export default function Charts() {
   const classes = useStyles();
 
+  // hooks
+  const [country, setCountry] = useState(null);
+  const [allData, setAllData] = useState({});
+
+  // initial render
+  useEffect(() => {
+    // fetch(`${root}/all`)
+    fetch(`http://localhost:5000/time/${country}`)
+      .then(response => response.json())
+      .then(data => {
+        setAllData(data);
+        // setAllLoaded(true);
+        console.log(data);
+      })
+      .catch(err => {
+        console.log('Error fetching data');
+      });
+  }, [country]);
+
   return (
     <div>
       <main className={classes.content}>
@@ -41,6 +60,9 @@ export default function Charts() {
         <Typography paragraph variant='h2' style={{color: '#FFF'}}>
           TO BE ADDED
         </Typography>
+        {/* {allData['Canada'].forEach(({ date, confirmed, recovered, deaths }) =>
+          console.log(`${date} active cases: ${confirmed - recovered - deaths}`)
+        )} */}
       </main>
     </div>
   );

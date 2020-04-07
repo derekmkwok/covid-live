@@ -26,7 +26,7 @@ app.get('/', (req, res) => res.send('Hello World!'));
 app.get('/all', data.getAll);
 app.get('/country/all', data.getAllCountries);  // need this line above otherwise 'all' is considered a parameter
 app.get('/country/:country', data.getCountry);
-app.get('/time', )
+app.get('/time/:country', time.getTime);
 
 const backendPort = process.env.PORT || 5000;
 

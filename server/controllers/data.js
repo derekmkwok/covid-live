@@ -8,7 +8,7 @@ const getAll = (req, res) => {
       console.log(data);
       res.send(data);
     })
-    .catch(err => console.log(`Error found: ${err}`))
+    .catch(err => console.log(`Error found: ${err}`));
 };
 
 // data for specific country
@@ -21,7 +21,7 @@ const getCountry = (req, res) => {
       console.log(data);
       res.send(data);
     })
-    .catch(err => console.log(`Error found: ${err}`))
+    .catch(err => console.log(`Error found: ${err}`));
 };
 
 // data for ALL countries in one array of objects
@@ -35,7 +35,7 @@ const getAllCountries = (req, res) => {
       // console.log(data);
       res.send(data);
     })
-    .catch(err => console.log(`Error found: ${err}`))
+    .catch(err => console.log(`Error found: ${err}`));
 };
 
 module.exports = {

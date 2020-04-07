@@ -83,7 +83,7 @@ export default function Cases() {
   const [allLoaded, setAllLoaded] = useState(false);
 
   // country hooks
-  const [country, setCountry] = useState('');
+  const [country, setCountry] = useState(null);
   const [cases, setCases] = useState(-1);  // -1 for initial state
   const [deaths, setDeaths] = useState(-1);
   const [recovered, setRecovered] = useState(-1);
@@ -92,6 +92,7 @@ export default function Cases() {
   const [todayDeaths, setTodayDeaths] = useState(-1);
   const [critical, setCritical] = useState(-1);
   const [loaded, setLoaded] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // initial render
   useEffect(() => {
@@ -114,6 +115,7 @@ export default function Cases() {
   // re-rendering for every country change
   useEffect(() => {
     // fetch(`${root}/all`)
+    setLoading(true);
     fetch(`http://localhost:5000/country/${country}`)
     .then(response => response.json())
     .then(data => {
@@ -126,8 +128,10 @@ export default function Cases() {
         setToday(data['todayCases']);
         setTodayDeaths(data['todayDeaths']);
         setCritical(data['critical']);
+        setLoading(false);
         setLoaded(true);
       } else {
+        setLoading(false);
         setLoaded(false);
       }
     })
@@ -135,6 +139,7 @@ export default function Cases() {
       console.log(cases);
     })
     .catch(err => {
+      setLoading(false);
       setLoaded(false);
       console.log('Error fetching data');
     });
@@ -206,7 +211,7 @@ export default function Cases() {
         </Typography>
         <br></br>
         <Typography paragraph variant='h6' style={{color: '#6495ED'}}>
-          Enter the name of a country below to get more information:
+          Enter the name of a country below to get more information (or enter world):
         </Typography>
         <form className={classes.root} noValidate autoComplete="off">
           <TextField 
@@ -229,7 +234,7 @@ export default function Cases() {
               }
             }} 
           />
-          {/* { !loaded ? <CircularProgress style={{ marginLeft: '25px', marginTop: '6px'}} /> : ''} */}
+          { loading ? <CircularProgress disableShrink color='secondary' style={{ marginLeft: '25px', marginTop: '6px'}} /> : ''}
         </form>
         <br></br>
         <TableContainer component={Paper} style={{borderColor:'#B0C4DE'}}>
@@ -262,25 +267,25 @@ export default function Cases() {
             <TableBody>
               <TableRow>
                 <TableCell align='center' style={{color:'#FFA500', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {loaded ? cases : <CircularProgress color='secondary' />}
+                  {loaded ? cases : ''}
                 </TableCell>
                 <TableCell align='center' style={{color:'red', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {loaded ? deaths : <CircularProgress color='secondary' />}
+                  {loaded ? deaths : ''}
                 </TableCell>
                 <TableCell align='center' style={{color:'#228B22', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {loaded ? recovered : <CircularProgress color='secondary' />}
+                  {loaded ? recovered : ''}
                 </TableCell>
                 <TableCell align='center' style={{color:'#FFFF00', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {loaded ? active : <CircularProgress color='secondary' />}
+                  {loaded ? active : ''}
                 </TableCell>
                 <TableCell align='center' style={{color:'#FFA500', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {loaded ? today : <CircularProgress color='secondary' />}
+                  {loaded ? today : ''}
                 </TableCell>
                 <TableCell align='center' style={{color:'red', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {loaded ? todayDeaths : <CircularProgress color='secondary' />}
+                  {loaded ? todayDeaths : ''}
                 </TableCell>
                 <TableCell align='center' style={{color:'#FF6347', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {loaded ? critical : <CircularProgress color='secondary' />}
+                  {loaded ? critical : ''}
                 </TableCell>
               </TableRow>
             </TableBody>
