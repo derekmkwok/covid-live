@@ -35,7 +35,7 @@ export default function Charts() {
   const classes = useStyles();
 
   // hooks
-  const [country, setCountry] = useState('canada');
+  const [country, setCountry] = useState('canada');  // initial as canada for testing/dev purposes
   const [allData, setAllData] = useState([]);
   const [cache, setCache] = useState({});  // local cache to store previously searched arrays of time series data
 
@@ -47,7 +47,7 @@ export default function Charts() {
       setAllData(cache[country.toLowerCase()]);
     } else {
       // fetch(`${root}/all`)
-      fetch(`http://localhost:5000/time/${'CANADA'}`)
+      fetch(`http://localhost:5000/time/${'CANADA'}`)  // initial as canada for testing/dev purposes, use country
       .then(response => response.json())
       .then(data => {
         // setAllData(prev => [...prev,...data]);

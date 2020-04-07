@@ -22,5 +22,5 @@
 * Features to be implemented:
   * Data regarding all cases - DONE BACKEND - FRONTEND IN PROGRESS
   * Data filtered by country - DONE BACKEND - FRONTEND IN PROGRESS
-  * Time series data visualized - IN PROGRESS BACKEND
+  * Time series data visualized - IN PROGRESS BACKEND AND FRONTEND
   * Information/resources regarding COVID-19 and where/how to seek help - IN PROGRESS FRONTEND

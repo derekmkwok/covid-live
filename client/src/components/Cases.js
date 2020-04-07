@@ -83,7 +83,7 @@ export default function Cases() {
   const [allLoaded, setAllLoaded] = useState(false);
 
   // country hooks
-  const [country, setCountry] = useState(null);
+  const [country, setCountry] = useState('world');
   const [cases, setCases] = useState(-1);  // -1 for initial state
   const [deaths, setDeaths] = useState(-1);
   const [recovered, setRecovered] = useState(-1);
@@ -134,9 +134,6 @@ export default function Cases() {
         setLoading(false);
         setLoaded(false);
       }
-    })
-    .then(() => {
-      console.log(cases);
     })
     .catch(err => {
       setLoading(false);
