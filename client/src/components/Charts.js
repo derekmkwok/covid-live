@@ -36,18 +36,19 @@ export default function Charts() {
 
   // hooks
   const [country, setCountry] = useState(null);
-  const [allData, setAllData] = useState({});
+  const [allData, setAllData] = useState([]);
 
   // initial render
   useEffect(() => {
     // fetch(`${root}/all`)
-    fetch(`http://localhost:5000/time/${country}`)
+    fetch(`http://localhost:5000/time/${'CANADA'}`)
       .then(response => response.json())
       .then(data => {
-        setAllData(data);
+        setAllData(prev => [...prev,...data]);
         // setAllLoaded(true);
         console.log(data);
       })
+      .then(() => console.log(allData))
       .catch(err => {
         console.log('Error fetching data');
       });
@@ -60,9 +61,7 @@ export default function Charts() {
         <Typography paragraph variant='h2' style={{color: '#FFF'}}>
           TO BE ADDED
         </Typography>
-        {/* {allData['Canada'].forEach(({ date, confirmed, recovered, deaths }) =>
-          console.log(`${date} active cases: ${confirmed - recovered - deaths}`)
-        )} */}
+        {/* {allData} */}
       </main>
     </div>
   );

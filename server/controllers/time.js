@@ -6,7 +6,16 @@ const getTime = (req, res) => {
     .then(response => response.json())
     .then(data => {
       // decide if data storage/processing done in backend/frontend
-      res.send(data);
+      const timeSeries = [];  // array of objects with time series data
+
+      // country is case sensitive - make sure only first letter capitalized
+      const country = req.params.country[0].toUpperCase() + req.params.country.slice(1).toLowerCase();
+
+      data[country].forEach(({ date, confirmed, recovered, deaths }) => {
+        timeSeries.push({ date, confirmed, recovered, deaths });
+      });
+      // console.log(timeSeries);
+      res.send(timeSeries);
     })
     .catch(err => console.log(`Error found: ${err}`));
 };
