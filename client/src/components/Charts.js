@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 const drawerWidth = 240;
 
@@ -29,6 +31,31 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
     height: '100%'
   },
+  notchedOutline: {
+    borderColor: 'orange'
+  },
+  label: {
+    color: 'orange',
+    "&.Mui-focused": {
+      color: "orange"
+    }
+  },
+  focus: {
+    borderColor: '#6495ED',
+  },
+  outlinedInput: {
+    '&$focus $notchedOutline': {
+      borderColor: 'orange',
+      color: 'orange'
+    },
+    "&:hover:not($disabled):not($focused):not($error) $notchedOutline": {
+      borderColor: 'orange'
+    }
+  },
+  table: {
+    minWidth: 650,
+    backgroundColor: '#282c34',
+  },
 }));
 
 export default function Charts() {
@@ -52,6 +79,7 @@ export default function Charts() {
       .then(data => {
         // setAllData(prev => [...prev,...data]);
         setAllData(data);
+        // store data in cache
         setCache(prev => {
           return {...prev, [country]:data}
         });
@@ -66,11 +94,15 @@ export default function Charts() {
     }
   }, [country]);
 
+  const handleChange = (event) => {
+    setCountry(event.target.value); // setCountry is asnyc, triggers re-render, use useEffect for render changes
+  };
+
   // testing if data really was received and changed state of data
   const onClick = (event) => {
     console.log(allData);
     console.log(cache);
-  }
+  };
 
   return (
     <div>
@@ -79,8 +111,62 @@ export default function Charts() {
         <Typography paragraph variant='h2' style={{color: '#FFF'}}>
           TO BE ADDED
         </Typography>
-        {/* {allData} */}
         <button onClick={onClick}>CLICK</button>
+        <Typography paragraph variant='h4' style={{color: '#ADD8E6', textDecoration: 'underline', margin: 'auto', fontWeight: 'bold'}}>
+          {/* <FontAwesomeIcon icon={faFlag} size='1x' style={{ marginRight: '20px' }}></FontAwesomeIcon> */}
+            Country Statistics
+          {/* <FontAwesomeIcon icon={faChartLine} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon> */}
+        </Typography>
+        <br></br>
+        <Typography paragraph variant='h6' style={{color: '#6495ED'}}>
+          Enter the name of a country below to get more information:
+        </Typography>
+        <form className={classes.root} noValidate autoComplete="off">
+          <TextField 
+            id="outlined-basic" 
+            label="Enter Country Here" 
+            onChange={handleChange} 
+            variant="outlined" 
+            InputLabelProps={{
+              classes: {
+                root: classes.label,
+                focused: classes.focus,
+              },
+            }}
+            InputProps={{
+              style: {color: '#6495ED'},
+              classes: {
+                root: classes.outlinedInput,
+                focused: classes.focus,
+                notchedOutline: classes.notchedOutline
+              }
+            }} 
+          />
+          {/* { loading ? <CircularProgress disableShrink color='secondary' style={{ marginLeft: '25px', marginTop: '6px'}} /> : ''} */}
+        </form>
+        <br></br>
+        { allData !== {}
+        ? 
+        <React.Fragment>
+          <LineChart
+            width={500}
+            height={300}
+            data={allData}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="date" />
+            <YAxis dataKey="confirmed" />
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="confirmed" stroke="#8884d8" activeDot={{ r: 8 }} />
+            <Line type="monotone" dataKey="recovered" stroke="#82ca9d" />
+          </LineChart>
+        </React.Fragment>
+        :
+        ''
+        }
+        
+
       </main>
     </div>
   );
