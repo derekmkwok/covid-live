@@ -145,28 +145,53 @@ export default function Charts() {
           {/* { loading ? <CircularProgress disableShrink color='secondary' style={{ marginLeft: '25px', marginTop: '6px'}} /> : ''} */}
         </form>
         <br></br>
-        { allData !== {}
-        ? 
+        {/* { allData !== {}
+        ?  */}
         <React.Fragment>
           <LineChart
-            width={500}
-            height={300}
+            width={800}
+            height={500}
             data={allData}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" />
-            <YAxis dataKey="confirmed" />
+            <XAxis tick={{fill:'#F8F8FF'}} dataKey="date" />
+            <YAxis tick={{fill:'#F8F8FF'}} />
             <Tooltip />
             <Legend />
-            <Line type="monotone" dataKey="confirmed" stroke="#8884d8" activeDot={{ r: 8 }} />
-            <Line type="monotone" dataKey="recovered" stroke="#82ca9d" />
+            <Line type="monotone" dataKey="confirmed" stroke="#FFA500" activeDot={{ r: 8 }} />
           </LineChart>
         </React.Fragment>
-        :
+        {/* :
         ''
-        }
-        
-
+        } */}
+        <React.Fragment>
+          <LineChart
+            width={800}
+            height={500}
+            data={allData}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis tick={{fill:'#F8F8FF'}} dataKey="date" />
+            <YAxis tick={{fill:'#F8F8FF'}} />
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="recovered" stroke="#228B22" />
+          </LineChart>
+        </React.Fragment>
+        <React.Fragment>
+          <LineChart
+            width={800}
+            height={500}
+            data={allData}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis tick={{fill:'#F8F8FF'}} dataKey="date" />
+            <YAxis tick={{fill:'#F8F8FF'}} />
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="deaths" stroke="red" />
+          </LineChart>
+        </React.Fragment>
       </main>
     </div>
   );
