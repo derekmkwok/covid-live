@@ -65,9 +65,11 @@ export default function Charts() {
   const [country, setCountry] = useState('canada');  // initial as canada for testing/dev purposes
   const [allData, setAllData] = useState([]);
   const [cache, setCache] = useState({});  // local cache to store previously searched arrays of time series data
+  const [loading, setLoading] = useState(false);
 
   // every time country changes
   useEffect(() => {
+    setLoading(true);
     setCountry(country.toLowerCase());
     if (cache[country.toLowerCase()] !== undefined) {
       // exists in cache - use cached data
@@ -86,9 +88,11 @@ export default function Charts() {
         // setAllData(allData.concat(data));
         // setAllLoaded(true);
         console.log(data);
+        setLoading(false);
       })
       .then(() => console.log(allData))
       .catch(err => {
+        setLoading(false);
         console.log('Error fetching data');
       });
     }
