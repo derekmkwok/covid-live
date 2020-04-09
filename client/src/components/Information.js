@@ -45,7 +45,7 @@ export default function Information() {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         {/* <Typography paragraph variant='h6' style={{color: '#F8F8FF'}}> */}
-        <Typography paragraph variant='h6' style={{color: '#6495ED'}}>
+        <Typography paragraph variant='h6' style={{color: '#3399ff'}}>
           <b><u>What is COVID-19?</u>
           <FontAwesomeIcon icon={faViruses} size='2x' style={{ marginLeft: '10px', color: '#8B0000' }}></FontAwesomeIcon></b>
         </Typography>
@@ -56,7 +56,7 @@ export default function Information() {
           Staying informed regarding facts about COVID-19 is also very important.
         </Typography>
         <br></br>
-        <Typography paragraph variant='h6' style={{color: '#6495ED'}}>
+        <Typography paragraph variant='h6' style={{color: '#3399ff'}}>
           <b><u>Some Best Practices:</u>
           <FontAwesomeIcon icon={faHandsWash} size='2x' style={{ marginLeft: '10px', color: '#0066cc' }}></FontAwesomeIcon></b>
         </Typography>
@@ -69,7 +69,7 @@ export default function Information() {
           <li style={{marginLeft: '40px'}}>Social distancing (at least 2m or 6ft apart)</li>
         </Typography>
         <br></br>
-        <Typography paragraph variant='h6' style={{color: '#6495ED'}}>
+        <Typography paragraph variant='h6' style={{color: '#3399ff'}}>
           <b><u>Resources and More Information:</u>
           <FontAwesomeIcon icon={faUserMd} size='2x' style={{ marginLeft: '10px', color: 'green' }}></FontAwesomeIcon></b>
         </Typography>

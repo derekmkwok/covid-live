@@ -71,13 +71,13 @@ export default function Home() {
     <div>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Typography paragraph variant='h3' style={{color: '#ADD8E6', margin: 'auto', fontWeight: 'bold'}}>
+        <Typography paragraph variant='h3' style={{color: 'orange', margin: 'auto', fontWeight: 'bold'}}>
           Welcome!
           <FontAwesomeIcon icon={faLaptopHouse} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon>
         </Typography>
         <br></br>
         <Typography paragraph variant='h5' style={{color: '#6495ED'}}>
-          The navigation bar can be found on the left.<br></br>Please select:
+          From the navigation bar on the left, please select:
         </Typography>
         <Typography paragraph variant='h6' style={{color: '#B0C4DE'}}>
           <b>Cases</b> - COVID-19 statistics worldwide or filtered by country

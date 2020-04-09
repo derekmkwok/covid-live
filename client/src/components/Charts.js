@@ -112,18 +112,16 @@ export default function Charts() {
     <div>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Typography paragraph variant='h2' style={{color: '#FFF'}}>
-          TO BE ADDED
-        </Typography>
-        <button onClick={onClick}>CLICK</button>
-        <Typography paragraph variant='h4' style={{color: '#ADD8E6', textDecoration: 'underline', margin: 'auto', fontWeight: 'bold'}}>
+        <button onClick={onClick}>TEST CONSOLE LOG BUTTON</button>
+        {/* <Typography paragraph variant='h4' style={{color: '#ADD8E6', textDecoration: 'underline', margin: 'auto', fontWeight: 'bold'}}> */}
+        <Typography paragraph variant='h4' style={{color: 'orange', textDecoration: 'underline', margin: 'auto', fontWeight: 'bold'}}>
           {/* <FontAwesomeIcon icon={faFlag} size='1x' style={{ marginRight: '20px' }}></FontAwesomeIcon> */}
-            Country Statistics
+            Statistics Visualized
           {/* <FontAwesomeIcon icon={faChartLine} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon> */}
         </Typography>
-        <br></br>
-        <Typography paragraph variant='h6' style={{color: '#6495ED'}}>
-          Enter the name of a country below to get more information:
+        <br></br> 
+        <Typography paragraph variant='h6' style={{color: '#3399ff'}}>
+          Enter the name of a country below:
         </Typography>
         <form className={classes.root} noValidate autoComplete="off">
           <TextField 

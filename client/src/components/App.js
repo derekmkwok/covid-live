@@ -73,7 +73,7 @@ export default function PermanentDrawerLeft() {
     <Router>
       <div className={classes.root}>
         <CssBaseline />
-        <AppBar position="fixed" className={classes.appBar} style={{backgroundColor:'#282c34'}}>
+        <AppBar position="fixed" className={classes.appBar} style={{backgroundColor:'#252525'}}>
           <Toolbar>
             <Typography variant="h3" noWrap style={{margin: 'auto', color: '#FFD700', fontWeight: 'bold'}}>
               <FontAwesomeIcon icon={faLungsVirus} style={{marginRight: '10px'}}></FontAwesomeIcon>
