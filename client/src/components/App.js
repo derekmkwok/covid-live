@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
     // backgroundColor: '#424242',
     backgroundColor: '#252525',
-    borderColor: '#F5F5F5'
+    borderColor: '#F8F8FF'
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
