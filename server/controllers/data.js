@@ -6,7 +6,7 @@ const getAll = (req, res) => {
     .then(response => response.json())
     .then(data => {
       console.log(data);
-      res.send(data);
+      return res.send(data);
     })
     .catch(err => console.log(`Error found: ${err}`));
 };
@@ -19,7 +19,7 @@ const getCountry = (req, res) => {
     .then(response => response.json())
     .then(data => {
       console.log(data);
-      res.send(data);
+      return res.send(data);
     })
     .catch(err => console.log(`Error found: ${err}`));
 };
@@ -33,7 +33,7 @@ const getAllCountries = (req, res) => {
       const canada = data.find(obj => obj['country'] === "Canada");  // example: fetching one country from array
       console.log(canada);
       // console.log(data);
-      res.send(data);
+      return res.send(data);
     })
     .catch(err => console.log(`Error found: ${err}`));
 };

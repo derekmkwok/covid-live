@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 const drawerWidth = 240;
@@ -62,7 +63,7 @@ export default function Charts() {
   const classes = useStyles();
 
   // hooks
-  const [country, setCountry] = useState('canada');  // initial as canada for testing/dev purposes
+  const [country, setCountry] = useState('');  // initial as canada for testing/dev purposes
   const [allData, setAllData] = useState([]);
   const [cache, setCache] = useState({});  // local cache to store previously searched arrays of time series data
   const [loading, setLoading] = useState(false);
@@ -76,19 +77,23 @@ export default function Charts() {
       setAllData(cache[country.toLowerCase()]);
     } else {
       // fetch(`${root}/all`)
-      fetch(`http://localhost:5000/time/${'CANADA'}`)  // initial as canada for testing/dev purposes, use country
+      fetch(`http://localhost:5000/time/${country}`)  // initial as canada for testing/dev purposes, use country
       .then(response => response.json())
       .then(data => {
-        // setAllData(prev => [...prev,...data]);
-        setAllData(data);
-        // store data in cache
-        setCache(prev => {
-          return {...prev, [country]:data}
-        });
-        // setAllData(allData.concat(data));
-        // setAllLoaded(true);
-        console.log(data);
-        setLoading(false);
+        if (data != undefined || data != null) {
+          // setAllData(prev => [...prev,...data]);
+          setAllData(data);
+          // store data in cache
+          setCache(prev => {
+            return {...prev, [country]:data}
+          });
+          // setAllData(allData.concat(data));
+          // setAllLoaded(true);
+          console.log(data);
+          setLoading(false);
+        } else {
+          setLoading(false);
+        }
       })
       .then(() => console.log(allData))
       .catch(err => {
@@ -106,6 +111,7 @@ export default function Charts() {
   const onClick = (event) => {
     console.log(allData);
     console.log(cache);
+    console.log(country);
   };
 
   return (
@@ -144,7 +150,7 @@ export default function Charts() {
               }
             }} 
           />
-          {/* { loading ? <CircularProgress disableShrink color='secondary' style={{ marginLeft: '25px', marginTop: '6px'}} /> : ''} */}
+          { loading ? <CircularProgress disableShrink color='secondary' style={{ marginLeft: '25px', marginTop: '6px'}} /> : ''}
         </form>
         <br></br>
         {/* { allData !== {}

@@ -10,14 +10,18 @@ const getTime = (req, res) => {
 
       // country is case sensitive - make sure only first letter capitalized
       const country = req.params.country[0].toUpperCase() + req.params.country.slice(1).toLowerCase();
+      console.log(country);
 
       data[country].forEach(({ date, confirmed, recovered, deaths }) => {
         timeSeries.push({ date, confirmed, recovered, deaths });
       });
       // console.log(timeSeries);
-      res.send(timeSeries);
+      return res.send(timeSeries);
     })
-    .catch(err => console.log(`Error found: ${err}`));
+    .catch(err => {
+      console.log(`Error found: ${err}`);
+      return;
+    });
 };
 
 // const getTimeCountry (to be implemented?)
