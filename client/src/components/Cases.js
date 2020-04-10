@@ -146,7 +146,7 @@ export default function Cases() {
     setCountry(event.target.value); // setCountry is asnyc, triggers re-render, use useEffect for render changes
   };
 
-  // TO DO: BETTER STYLING
+  // TO DO: BETTER STYLING, refer to button in charts page on how to do a button instead of constant loading
 
   return (
     <div>

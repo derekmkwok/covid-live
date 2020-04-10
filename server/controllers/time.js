@@ -14,6 +14,7 @@ const getTime = (req, res) => {
 
       if (data[country] === undefined) {
         // to do
+        // find a way to make it so that all the countries use lower case when selecting by key (case insensitive)
         console.log('not found')
       } else {
         data[country].forEach(({ date, confirmed, recovered, deaths }) => {

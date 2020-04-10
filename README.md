@@ -2,7 +2,7 @@
 
 ## WORK IN PROGRESS (DEVELOPMENT STAGE)
 * Frontend - Working on implementing front end to render data from time series API route
-* Backend - Initial routes complete. Implemented API routing for time series data
+* Backend - Initial routes complete. Implementing API routing for time series data
 * Planning to deploy once minimum viable product completed
 
 ## Technologies
