@@ -12,11 +12,16 @@ const getTime = (req, res) => {
       const country = req.params.country[0].toUpperCase() + req.params.country.slice(1).toLowerCase();
       console.log(country);
 
-      data[country].forEach(({ date, confirmed, recovered, deaths }) => {
-        timeSeries.push({ date, confirmed, recovered, deaths });
-      });
-      // console.log(timeSeries);
-      return res.send(timeSeries);
+      if (data[country] === undefined) {
+        // to do
+        console.log('not found')
+      } else {
+        data[country].forEach(({ date, confirmed, recovered, deaths }) => {
+          timeSeries.push({ date, confirmed, recovered, deaths });
+        });
+        // console.log(timeSeries);
+        return res.send(timeSeries);
+      }
     })
     .catch(err => {
       console.log(`Error found: ${err}`);

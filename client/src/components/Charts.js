@@ -117,6 +117,7 @@ export default function Charts() {
     if (cache[country.toLowerCase()] !== undefined) {
       // exists in cache - use cached data
       setAllData(cache[country.toLowerCase()]);
+      setLoading(false);
     } else {
       // fetch(`${root}/all`)
       fetch(`http://localhost:5000/time/${country}`)  // initial as canada for testing/dev purposes, use country
