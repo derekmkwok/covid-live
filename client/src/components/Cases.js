@@ -10,6 +10,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 
 // Font-Awesome imports
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -84,13 +85,13 @@ export default function Cases() {
 
   // country hooks
   const [country, setCountry] = useState('world');
-  const [cases, setCases] = useState(-1);  // -1 for initial state
-  const [deaths, setDeaths] = useState(-1);
-  const [recovered, setRecovered] = useState(-1);
-  const [active, setActive] = useState(-1);
-  const [today, setToday] = useState(-1);
-  const [todayDeaths, setTodayDeaths] = useState(-1);
-  const [critical, setCritical] = useState(-1);
+  const [cases, setCases] = useState('');  // empty string for initial state
+  const [deaths, setDeaths] = useState('');
+  const [recovered, setRecovered] = useState('');
+  const [active, setActive] = useState('');
+  const [today, setToday] = useState('');
+  const [todayDeaths, setTodayDeaths] = useState('');
+  const [critical, setCritical] = useState('');
   const [loaded, setLoaded] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -114,6 +115,36 @@ export default function Cases() {
 
   // re-rendering for every country change
   useEffect(() => {
+    // // fetch(`${root}/all`)
+    // setLoading(true);
+    // fetch(`http://localhost:5000/country/${country}`)
+    // .then(response => response.json())
+    // .then(data => {
+    //   // if country data exists, set all values
+    //   if (!(data['cases'] === undefined || data['cases'] === null)) {
+    //     setCases(data['cases']);
+    //     setDeaths(data['deaths']);
+    //     setRecovered(data['recovered']);
+    //     setActive(data['active']);
+    //     setToday(data['todayCases']);
+    //     setTodayDeaths(data['todayDeaths']);
+    //     setCritical(data['critical']);
+    //     setLoading(false);
+    //     setLoaded(true);
+    //   } else {
+    //     setLoading(false);
+    //     setLoaded(false);
+    //   }
+    // })
+    // .catch(err => {
+    //   setLoading(false);
+    //   setLoaded(false);
+    //   console.log('Error fetching data');
+    // });
+  }, [country]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
     // fetch(`${root}/all`)
     setLoading(true);
     fetch(`http://localhost:5000/country/${country}`)
@@ -129,18 +160,15 @@ export default function Cases() {
         setTodayDeaths(data['todayDeaths']);
         setCritical(data['critical']);
         setLoading(false);
-        setLoaded(true);
       } else {
         setLoading(false);
-        setLoaded(false);
       }
     })
     .catch(err => {
       setLoading(false);
-      setLoaded(false);
       console.log('Error fetching data');
     });
-  }, [country]);
+  };
 
   const handleChange = (event) => {
     setCountry(event.target.value); // setCountry is asnyc, triggers re-render, use useEffect for render changes
@@ -210,7 +238,7 @@ export default function Cases() {
         <Typography paragraph variant='h6' style={{color: '#3399ff'}}>
           Enter the name of a country below (or enter world):
         </Typography>
-        <form className={classes.root} noValidate autoComplete="off">
+        <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
           <TextField 
             id="outlined-basic" 
             label="Enter Country Here" 
@@ -231,6 +259,9 @@ export default function Cases() {
               }
             }} 
           />
+          <Button variant="outlined" color="primary" type='submit'>
+            Search
+          </Button>
           { loading ? <CircularProgress disableShrink color='secondary' style={{ marginLeft: '25px', marginTop: '6px'}} /> : ''}
         </form>
         <br></br>
@@ -264,25 +295,25 @@ export default function Cases() {
             <TableBody>
               <TableRow>
                 <TableCell align='center' style={{color:'#FFA500', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {loaded ? cases : ''}
+                  {!loading ? cases : ''}
                 </TableCell>
                 <TableCell align='center' style={{color:'red', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {loaded ? deaths : ''}
+                  {!loading ? deaths : ''}
                 </TableCell>
                 <TableCell align='center' style={{color:'#228B22', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {loaded ? recovered : ''}
+                  {!loading ? recovered : ''}
                 </TableCell>
                 <TableCell align='center' style={{color:'#FFFF00', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {loaded ? active : ''}
+                  {!loading ? active : ''}
                 </TableCell>
                 <TableCell align='center' style={{color:'#FFA500', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {loaded ? today : ''}
+                  {!loading ? today : ''}
                 </TableCell>
                 <TableCell align='center' style={{color:'red', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {loaded ? todayDeaths : ''}
+                  {!loading ? todayDeaths : ''}
                 </TableCell>
                 <TableCell align='center' style={{color:'#FF6347', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {loaded ? critical : ''}
+                  {!loading ? critical : ''}
                 </TableCell>
               </TableRow>
             </TableBody>
