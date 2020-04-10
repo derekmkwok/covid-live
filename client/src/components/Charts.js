@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Button from '@material-ui/core/Button';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 const drawerWidth = 240;
@@ -70,6 +71,47 @@ export default function Charts() {
 
   // every time country changes
   useEffect(() => {
+    // setLoading(true);
+    // setCountry(country.toLowerCase());
+    // if (cache[country.toLowerCase()] !== undefined) {
+    //   // exists in cache - use cached data
+    //   setAllData(cache[country.toLowerCase()]);
+    // } else {
+    //   // fetch(`${root}/all`)
+    //   fetch(`http://localhost:5000/time/${country}`)  // initial as canada for testing/dev purposes, use country
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     if (data != undefined || data != null) {
+    //       // setAllData(prev => [...prev,...data]);
+    //       setAllData(data);
+    //       // store data in cache
+    //       setCache(prev => {
+    //         return {...prev, [country]:data}
+    //       });
+    //       // setAllData(allData.concat(data));
+    //       // setAllLoaded(true);
+    //       console.log(data);
+    //       setLoading(false);
+    //     } else {
+    //       setLoading(false);
+    //     }
+    //   })
+    //   .then(() => console.log(allData))
+    //   .catch(err => {
+    //     setLoading(false);
+    //     console.log('Error fetching data');
+    //   });
+    // }
+  }, [country]);
+
+  const handleChange = (event) => {
+    // event.nativeEvent.stopImmediatePropagation();
+    setCountry(event.target.value); // setCountry is asnyc, triggers re-render, use useEffect for render changes
+    // console.log('asdf');
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
     setLoading(true);
     setCountry(country.toLowerCase());
     if (cache[country.toLowerCase()] !== undefined) {
@@ -101,10 +143,6 @@ export default function Charts() {
         console.log('Error fetching data');
       });
     }
-  }, [country]);
-
-  const handleChange = (event) => {
-    setCountry(event.target.value); // setCountry is asnyc, triggers re-render, use useEffect for render changes
   };
 
   // testing if data really was received and changed state of data
@@ -129,7 +167,7 @@ export default function Charts() {
         <Typography paragraph variant='h6' style={{color: '#3399ff'}}>
           Enter the name of a country below:
         </Typography>
-        <form className={classes.root} noValidate autoComplete="off">
+        <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
           <TextField 
             id="outlined-basic" 
             label="Enter Country Here" 
@@ -150,6 +188,9 @@ export default function Charts() {
               }
             }} 
           />
+          <Button variant="outlined" color="primary" type='submit'>
+            Search
+          </Button>
           { loading ? <CircularProgress disableShrink color='secondary' style={{ marginLeft: '25px', marginTop: '6px'}} /> : ''}
         </form>
         <br></br>
