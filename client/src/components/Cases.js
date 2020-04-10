@@ -114,34 +114,34 @@ export default function Cases() {
   }, []);
 
   // re-rendering for every country change
-  useEffect(() => {
-    // // fetch(`${root}/all`)
-    // setLoading(true);
-    // fetch(`http://localhost:5000/country/${country}`)
-    // .then(response => response.json())
-    // .then(data => {
-    //   // if country data exists, set all values
-    //   if (!(data['cases'] === undefined || data['cases'] === null)) {
-    //     setCases(data['cases']);
-    //     setDeaths(data['deaths']);
-    //     setRecovered(data['recovered']);
-    //     setActive(data['active']);
-    //     setToday(data['todayCases']);
-    //     setTodayDeaths(data['todayDeaths']);
-    //     setCritical(data['critical']);
-    //     setLoading(false);
-    //     setLoaded(true);
-    //   } else {
-    //     setLoading(false);
-    //     setLoaded(false);
-    //   }
-    // })
-    // .catch(err => {
-    //   setLoading(false);
-    //   setLoaded(false);
-    //   console.log('Error fetching data');
-    // });
-  }, [country]);
+  // useEffect(() => {
+  //   // fetch(`${root}/all`)
+  //   setLoading(true);
+  //   fetch(`http://localhost:5000/country/${country}`)
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     // if country data exists, set all values
+  //     if (!(data['cases'] === undefined || data['cases'] === null)) {
+  //       setCases(data['cases']);
+  //       setDeaths(data['deaths']);
+  //       setRecovered(data['recovered']);
+  //       setActive(data['active']);
+  //       setToday(data['todayCases']);
+  //       setTodayDeaths(data['todayDeaths']);
+  //       setCritical(data['critical']);
+  //       setLoading(false);
+  //       setLoaded(true);
+  //     } else {
+  //       setLoading(false);
+  //       setLoaded(false);
+  //     }
+  //   })
+  //   .catch(err => {
+  //     setLoading(false);
+  //     setLoaded(false);
+  //     console.log('Error fetching data');
+  //   });
+  // }, [country]);
 
   const handleSubmit = (event) => {
     event.preventDefault();

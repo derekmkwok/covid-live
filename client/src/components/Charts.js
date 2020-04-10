@@ -66,20 +66,91 @@ export default function Charts() {
   const classes = useStyles();
 
   // hooks
-  const [country, setCountry] = useState('');  // initial as canada for testing/dev purposes
+  const [country, setCountry] = useState('');
   const [allData, setAllData] = useState([]);
   const [cache, setCache] = useState({});  // local cache to store previously searched arrays of time series data
   const [loading, setLoading] = useState(false);
 
   // every time country changes
+
+  // initial render, fetch all the data
   useEffect(() => {
-    // setLoading(true);
+     // fetch(`${root}/all`)
+     fetch(`http://localhost:5000/time`)
+     .then(response => response.json())
+     .then(data => {
+       if (data != undefined || data != null) {
+         // setAllData(prev => [...prev,...data]);
+         setCache(data);
+         // store data in cache
+        //  setCache(prev => {
+        //    return {...prev, [country]:data}
+        //  });
+         // setAllData(allData.concat(data));
+         // setAllLoaded(true);
+         console.log(data);
+         setLoading(false);
+       } else {
+         setLoading(false);
+       }
+     })
+     .then(() => console.log(allData))
+     .catch(err => {
+       setLoading(false);
+       console.log('Error fetching data');
+     });
+  }, []);
+
+  // useEffect(() => {
+  //   setLoading(true);
+  //   setCountry(country.toLowerCase());
+  //   if (cache[country.toLowerCase()] !== undefined) {
+  //     // exists in cache - use cached data
+  //     setAllData(cache[country.toLowerCase()]);
+  //   } else {
+  //     // fetch(`${root}/all`)
+  //     fetch(`http://localhost:5000/time/${country}`)  // initial as canada for testing/dev purposes, use country
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       if (data != undefined || data != null) {
+  //         // setAllData(prev => [...prev,...data]);
+  //         setAllData(data);
+  //         // store data in cache
+  //         setCache(prev => {
+  //           return {...prev, [country]:data}
+  //         });
+  //         // setAllData(allData.concat(data));
+  //         // setAllLoaded(true);
+  //         console.log(data);
+  //         setLoading(false);
+  //       } else {
+  //         setLoading(false);
+  //       }
+  //     })
+  //     .then(() => console.log(allData))
+  //     .catch(err => {
+  //       setLoading(false);
+  //       console.log('Error fetching data');
+  //     });
+  //   }
+  // }, [country]);
+
+  const handleChange = (event) => {
+    // event.nativeEvent.stopImmediatePropagation();
+    setCountry(event.target.value); // setCountry is asnyc, triggers re-render, use useEffect for render changes
+    // console.log('asdf');
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setLoading(true);
     // setCountry(country.toLowerCase());
-    // if (cache[country.toLowerCase()] !== undefined) {
-    //   // exists in cache - use cached data
-    //   setAllData(cache[country.toLowerCase()]);
-    // } else {
-    //   // fetch(`${root}/all`)
+    if (cache[country] !== undefined) {
+      // exists in cache - use cached data
+      setAllData(cache[country]);
+      setLoading(false);
+    } else {
+      // fetch(`${root}/all`)
     //   fetch(`http://localhost:5000/time/${country}`)  // initial as canada for testing/dev purposes, use country
     //   .then(response => response.json())
     //   .then(data => {
@@ -104,47 +175,8 @@ export default function Charts() {
     //     console.log('Error fetching data');
     //   });
     // }
-  }, [country]);
-
-  const handleChange = (event) => {
-    // event.nativeEvent.stopImmediatePropagation();
-    setCountry(event.target.value); // setCountry is asnyc, triggers re-render, use useEffect for render changes
-    // console.log('asdf');
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setLoading(true);
-    setCountry(country.toLowerCase());
-    if (cache[country.toLowerCase()] !== undefined) {
-      // exists in cache - use cached data
-      setAllData(cache[country.toLowerCase()]);
+      console.log('not in cache');
       setLoading(false);
-    } else {
-      // fetch(`${root}/all`)
-      fetch(`http://localhost:5000/time/${country}`)  // initial as canada for testing/dev purposes, use country
-      .then(response => response.json())
-      .then(data => {
-        if (data != undefined || data != null) {
-          // setAllData(prev => [...prev,...data]);
-          setAllData(data);
-          // store data in cache
-          setCache(prev => {
-            return {...prev, [country]:data}
-          });
-          // setAllData(allData.concat(data));
-          // setAllLoaded(true);
-          console.log(data);
-          setLoading(false);
-        } else {
-          setLoading(false);
-        }
-      })
-      .then(() => console.log(allData))
-      .catch(err => {
-        setLoading(false);
-        console.log('Error fetching data');
-      });
     }
   };
 
