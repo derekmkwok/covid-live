@@ -100,82 +100,47 @@ export default function Charts() {
      });
   }, []);
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   setCountry(country.toLowerCase());
-  //   if (cache[country.toLowerCase()] !== undefined) {
-  //     // exists in cache - use cached data
-  //     setAllData(cache[country.toLowerCase()]);
-  //   } else {
-  //     // fetch(`${root}/all`)
-  //     fetch(`http://localhost:5000/time/${country}`)  // initial as canada for testing/dev purposes, use country
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       if (data != undefined || data != null) {
-  //         // setAllData(prev => [...prev,...data]);
-  //         setAllData(data);
-  //         // store data in cache
-  //         setCache(prev => {
-  //           return {...prev, [country]:data}
-  //         });
-  //         // setAllData(allData.concat(data));
-  //         // setAllLoaded(true);
-  //         console.log(data);
-  //         setLoading(false);
-  //       } else {
-  //         setLoading(false);
-  //       }
-  //     })
-  //     .then(() => console.log(allData))
-  //     .catch(err => {
-  //       setLoading(false);
-  //       console.log('Error fetching data');
-  //     });
-  //   }
-  // }, [country]);
-
   const handleChange = (event) => {
-    // let search = event.target.value.toLowerCase();
-    // switch
+    let search = event.target.value.toLowerCase();
+    // manually changing search to key names in the time series data object
+    switch (search) {
+      case ('usa'):
+        search = 'us';
+        break;
+      case ('united states'):
+        search = 'us';
+        break;
+      case ('united states of america'):
+        search = 'us';
+        break;
+      case('uk'):
+        search = 'united kingdom';
+        break;
+      case('uae'):
+        search = 'united arab emirates';
+        break;
+      case('korea'):
+        search = 'korea, south';
+        break;
+      case('south korea'):
+        search = 'korea, south';
+        break;
+      case('taiwan'):
+        search = 'taiwan*';
+        break;
+    }
     // if (search === 'usa' || search === 'united states' || search === 'united states of america') {
     //   search = 'us';
     // }
-    setCountry(event.target.value.toLowerCase()); // setCountry is asnyc, triggers re-render, use useEffect for render changes
-    // console.log('asdf');
+    setCountry(search); // setCountry is asnyc, triggers re-render, use useEffect for render changes
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // setCountry(country.toLowerCase());
     if (cache[country] !== undefined) {
       // exists in cache - use cached data
       setAllData(cache[country]);
     } else {
-      // fetch(`${root}/all`)
-    //   fetch(`http://localhost:5000/time/${country}`)  // initial as canada for testing/dev purposes, use country
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     if (data != undefined || data != null) {
-    //       // setAllData(prev => [...prev,...data]);
-    //       setAllData(data);
-    //       // store data in cache
-    //       setCache(prev => {
-    //         return {...prev, [country]:data}
-    //       });
-    //       // setAllData(allData.concat(data));
-    //       // setAllLoaded(true);
-    //       console.log(data);
-    //       setLoading(false);
-    //     } else {
-    //       setLoading(false);
-    //     }
-    //   })
-    //   .then(() => console.log(allData))
-    //   .catch(err => {
-    //     setLoading(false);
-    //     console.log('Error fetching data');
-    //   });
-    // }
       console.log('not in cache');
       setLoading(false);
     }

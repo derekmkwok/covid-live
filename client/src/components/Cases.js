@@ -81,10 +81,10 @@ export default function Cases() {
 
   // country hooks
   const [country, setCountry] = useState('world');
-
   const [countryData, setCountryData] = useState({});
   const [loading, setLoading] = useState(false);
 
+  // caching data to component
   const [cache, setCache] = useState({})
 
   // initial render
@@ -104,12 +104,11 @@ export default function Cases() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // fetch(`${root}/all`)
-    setLoading(true);
     console.log(cache);
     if (cache[country.toLowerCase()] !== undefined) {
       setCountryData(cache[country.toLowerCase()]);
-      setLoading(false);
     } else {
+      setLoading(true);
       fetch(`http://localhost:5000/country/${country}`)
       .then(response => response.json())
       .then(data => {
