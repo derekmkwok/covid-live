@@ -1,8 +1,8 @@
 # COVID-19 Live Data Tracker App
 
 ## WORK IN PROGRESS (DEVELOPMENT STAGE)
-* Frontend - Working on implementing front end to render data from time series API route
-* Backend - Initial routes complete. Implementing API routing for time series data
+* Frontend - Working on finishing styling for front end
+* Backend - Initial routes complete. Implemented API routing for time series data
 * Planning to deploy once minimum viable product completed
 
 ## Technologies
@@ -22,5 +22,5 @@
 * Features to be implemented:
   * Data regarding all cases - DONE BACKEND - FRONTEND IN PROGRESS
   * Data filtered by country - DONE BACKEND - FRONTEND IN PROGRESS
-  * Time series data visualized - MOSTLY DONE BACKEND - FRONTEND IN PROGRESS
+  * Time series data visualized - DONE BACKEND - FRONTEND IN PROGRESS
   * Information/resources regarding COVID-19 and where/how to seek help - IN PROGRESS FRONTEND

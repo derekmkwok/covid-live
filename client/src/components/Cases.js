@@ -134,7 +134,7 @@ export default function Cases() {
     setCountry(event.target.value.toLowerCase()); // setCountry is asnyc, triggers re-render, use useEffect for render changes
   };
 
-  // TO DO: BETTER STYLING, refer to button in charts page on how to do a button instead of constant loading
+  ///////////// TO DO: ADD SNACK BAR POPUPS ///////////////////
 
   return (
     <div>

@@ -129,9 +129,6 @@ export default function Charts() {
         search = 'taiwan*';
         break;
     }
-    // if (search === 'usa' || search === 'united states' || search === 'united states of america') {
-    //   search = 'us';
-    // }
     setCountry(search); // setCountry is asnyc, triggers re-render, use useEffect for render changes
   };
 
@@ -145,6 +142,8 @@ export default function Charts() {
       setLoading(false);
     }
   };
+
+  ///////////// TO DO: ADD SNACK BAR POPUPS ///////////////////
 
   // testing if data really was received and changed state of data
   const onClick = (event) => {
