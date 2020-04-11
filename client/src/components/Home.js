@@ -43,28 +43,6 @@ const root = window.location.protocol + '//' + window.location.host;
 export default function Home() {
   const classes = useStyles();
 
-  // Hooks
-  // const [cases, setCases] = useState(0);
-  // const [deaths, setDeaths] = useState(0);
-  // const [recovered, setRecovered] = useState(0);
-  // const [active, setActive] = useState(0);
-  // const [countries, setCountries] = useState(0);
- 
-  // TODO: Add datetime for when data is fetched and is latest?
-  // useEffect(() => {
-  //   // fetch(`${root}/all`)
-  //   fetch(`http://localhost:5000/all`)
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       setCases(data['cases']);
-  //       setDeaths(data['deaths']);
-  //       setRecovered(data['recovered']);
-  //       setActive(data['active']);
-  //       setCountries(data['affectedCountries']);
-  //     })
-  //     .catch(err => console.log('Error fetching data'));
-  // });
-
   // TO DO UPDATE HOME PAGE, MOVED STATS TO CASES PAGE, ADD ABOUT?
 
   return (

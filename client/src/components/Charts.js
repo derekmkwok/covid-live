@@ -68,18 +68,17 @@ export default function Charts() {
   // hooks
   const [country, setCountry] = useState('');
   const [allData, setAllData] = useState([]);
-  const [cache, setCache] = useState({});  // local cache to store previously searched arrays of time series data
+  const [cache, setCache] = useState({});  // local cache to store arrays of time series data
   const [loading, setLoading] = useState(false);
-
-  // every time country changes
 
   // initial render, fetch all the data
   useEffect(() => {
+    setLoading(true);
      // fetch(`${root}/all`)
      fetch(`http://localhost:5000/time`)
      .then(response => response.json())
      .then(data => {
-       if (data != undefined || data != null) {
+       if (data !== undefined || data !== null) {
          // setAllData(prev => [...prev,...data]);
          setCache(data);
          // store data in cache
@@ -136,19 +135,21 @@ export default function Charts() {
   // }, [country]);
 
   const handleChange = (event) => {
-    // event.nativeEvent.stopImmediatePropagation();
-    setCountry(event.target.value); // setCountry is asnyc, triggers re-render, use useEffect for render changes
+    // let search = event.target.value.toLowerCase();
+    // switch
+    // if (search === 'usa' || search === 'united states' || search === 'united states of america') {
+    //   search = 'us';
+    // }
+    setCountry(event.target.value.toLowerCase()); // setCountry is asnyc, triggers re-render, use useEffect for render changes
     // console.log('asdf');
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setLoading(true);
     // setCountry(country.toLowerCase());
     if (cache[country] !== undefined) {
       // exists in cache - use cached data
       setAllData(cache[country]);
-      setLoading(false);
     } else {
       // fetch(`${root}/all`)
     //   fetch(`http://localhost:5000/time/${country}`)  // initial as canada for testing/dev purposes, use country
@@ -185,6 +186,7 @@ export default function Charts() {
     console.log(allData);
     console.log(cache);
     console.log(country);
+    console.log(Object.keys(cache));
   };
 
   return (
@@ -223,59 +225,60 @@ export default function Charts() {
               }
             }} 
           />
-          <Button variant="outlined" color="primary" type='submit'>
+          <Button variant="outlined" color="primary" type='submit' disabled={loading}>
             Search
           </Button>
           { loading ? <CircularProgress disableShrink color='secondary' style={{ marginLeft: '25px', marginTop: '6px'}} /> : ''}
         </form>
         <br></br>
-        {/* { allData !== {}
-        ?  */}
-        <React.Fragment>
-          <LineChart
-            width={800}
-            height={500}
-            data={allData}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis tick={{fill:'#F8F8FF'}} dataKey="date" />
-            <YAxis tick={{fill:'#F8F8FF'}} />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="confirmed" stroke="#FFA500" activeDot={{ r: 8 }} />
-          </LineChart>
-        </React.Fragment>
-        {/* :
-        ''
-        } */}
-        <React.Fragment>
-          <LineChart
-            width={800}
-            height={500}
-            data={allData}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis tick={{fill:'#F8F8FF'}} dataKey="date" />
-            <YAxis tick={{fill:'#F8F8FF'}} />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="recovered" stroke="#228B22" />
-          </LineChart>
-        </React.Fragment>
-        <React.Fragment>
-          <LineChart
-            width={800}
-            height={500}
-            data={allData}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis tick={{fill:'#F8F8FF'}} dataKey="date" />
-            <YAxis tick={{fill:'#F8F8FF'}} />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="deaths" stroke="red" />
-          </LineChart>
-        </React.Fragment>
+        { Object.keys(allData).length !== 0 ? 
+          <React.Fragment>
+            <LineChart
+              width={800}
+              height={500}
+              data={allData}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis tick={{fill:'#F8F8FF'}} dataKey="date" />
+              <YAxis tick={{fill:'#F8F8FF'}} />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="confirmed" stroke="#FFA500" activeDot={{ r: 8 }} />
+            </LineChart>
+          </React.Fragment>
+        : '' }
+        { Object.keys(allData).length !== 0 ? 
+          <React.Fragment>
+            <LineChart
+              width={800}
+              height={500}
+              data={allData}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis tick={{fill:'#F8F8FF'}} dataKey="date" />
+              <YAxis tick={{fill:'#F8F8FF'}} />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="recovered" stroke="#228B22" />
+            </LineChart>
+          </React.Fragment>
+        : '' }
+        { Object.keys(allData).length !== 0 ? 
+          <React.Fragment>
+            <LineChart
+              width={800}
+              height={500}
+              data={allData}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis tick={{fill:'#F8F8FF'}} dataKey="date" />
+              <YAxis tick={{fill:'#F8F8FF'}} />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="deaths" stroke="red" />
+            </LineChart>
+          </React.Fragment>
+        : '' }
       </main>
     </div>
   );

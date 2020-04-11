@@ -7,6 +7,11 @@ const getTime = (req, res) => {
     .then(data => {
       // decide if data storage/processing done in backend/frontend
 
+      // return res.send(data);
+
+
+      /////////////// ANOTHER METHOD FOR ALL LOWER CASE ////////////////////
+
       // return object to client side with all keys lowercased
       const keys = Object.keys(data);
       const timeSeries = {};  // empty object to store 
@@ -17,8 +22,6 @@ const getTime = (req, res) => {
       console.log(timeSeries);
 
       return res.send(timeSeries);
-
-
 
       ///////////////////////// OLD METHOD BELOW ////////////////////////////////
 

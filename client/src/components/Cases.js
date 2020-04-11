@@ -76,24 +76,16 @@ export default function Cases() {
   const classes = useStyles();
 
   // worldwide hooks
-  const [allCases, setAllCases] = useState(-1);
-  const [allDeaths, setAllDeaths] = useState(-1);
-  const [allRecovered, setAllRecovered] = useState(-1);
-  const [allActive, setAllActive] = useState(-1);
-  const [allCountries, setAllCountries] = useState(-1);
+  const [allData, setAllData] = useState({})
   const [allLoaded, setAllLoaded] = useState(false);
 
   // country hooks
   const [country, setCountry] = useState('world');
-  const [cases, setCases] = useState('');  // empty string for initial state
-  const [deaths, setDeaths] = useState('');
-  const [recovered, setRecovered] = useState('');
-  const [active, setActive] = useState('');
-  const [today, setToday] = useState('');
-  const [todayDeaths, setTodayDeaths] = useState('');
-  const [critical, setCritical] = useState('');
-  const [loaded, setLoaded] = useState(false);
+
+  const [countryData, setCountryData] = useState({});
   const [loading, setLoading] = useState(false);
+
+  const [cache, setCache] = useState({})
 
   // initial render
   useEffect(() => {
@@ -101,11 +93,7 @@ export default function Cases() {
     fetch(`http://localhost:5000/all`)
       .then(response => response.json())
       .then(data => {
-        setAllCases(data['cases']);
-        setAllDeaths(data['deaths']);
-        setAllRecovered(data['recovered']);
-        setAllActive(data['active']);
-        setAllCountries(data['affectedCountries']);
+        setAllData(data);
         setAllLoaded(true);
       })
       .catch(err => {
@@ -113,65 +101,38 @@ export default function Cases() {
       });
   }, []);
 
-  // re-rendering for every country change
-  // useEffect(() => {
-  //   // fetch(`${root}/all`)
-  //   setLoading(true);
-  //   fetch(`http://localhost:5000/country/${country}`)
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     // if country data exists, set all values
-  //     if (!(data['cases'] === undefined || data['cases'] === null)) {
-  //       setCases(data['cases']);
-  //       setDeaths(data['deaths']);
-  //       setRecovered(data['recovered']);
-  //       setActive(data['active']);
-  //       setToday(data['todayCases']);
-  //       setTodayDeaths(data['todayDeaths']);
-  //       setCritical(data['critical']);
-  //       setLoading(false);
-  //       setLoaded(true);
-  //     } else {
-  //       setLoading(false);
-  //       setLoaded(false);
-  //     }
-  //   })
-  //   .catch(err => {
-  //     setLoading(false);
-  //     setLoaded(false);
-  //     console.log('Error fetching data');
-  //   });
-  // }, [country]);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     // fetch(`${root}/all`)
     setLoading(true);
-    fetch(`http://localhost:5000/country/${country}`)
-    .then(response => response.json())
-    .then(data => {
-      // if country data exists, set all values
-      if (!(data['cases'] === undefined || data['cases'] === null)) {
-        setCases(data['cases']);
-        setDeaths(data['deaths']);
-        setRecovered(data['recovered']);
-        setActive(data['active']);
-        setToday(data['todayCases']);
-        setTodayDeaths(data['todayDeaths']);
-        setCritical(data['critical']);
-        setLoading(false);
-      } else {
-        setLoading(false);
-      }
-    })
-    .catch(err => {
+    console.log(cache);
+    if (cache[country.toLowerCase()] !== undefined) {
+      setCountryData(cache[country.toLowerCase()]);
       setLoading(false);
-      console.log('Error fetching data');
-    });
+    } else {
+      fetch(`http://localhost:5000/country/${country}`)
+      .then(response => response.json())
+      .then(data => {
+        // if country data exists, set all values
+        if (!(data === undefined || data === null)) {
+          setCountryData(data);
+          setCache(prev => {
+            return {...prev, [country.toLowerCase()]:data};
+          });
+          setLoading(false);
+        } else {
+          setLoading(false);
+        }
+      })
+      .catch(err => {
+        setLoading(false);
+        console.log('Error fetching data');
+      });
+    }
   };
 
   const handleChange = (event) => {
-    setCountry(event.target.value); // setCountry is asnyc, triggers re-render, use useEffect for render changes
+    setCountry(event.target.value.toLowerCase()); // setCountry is asnyc, triggers re-render, use useEffect for render changes
   };
 
   // TO DO: BETTER STYLING, refer to button in charts page on how to do a button instead of constant loading
@@ -210,19 +171,19 @@ export default function Cases() {
             <TableBody>
               <TableRow>
                 <TableCell align='center' style={{color:'#FFA500', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {allLoaded ? allCases : <CircularProgress color='secondary' />}
+                  {allLoaded ? allData['cases'] : <CircularProgress color='secondary' />}
                 </TableCell>
                 <TableCell align='center' style={{color:'red', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {allLoaded ? allDeaths : <CircularProgress color='secondary' />}
+                  {allLoaded ? allData['deaths'] : <CircularProgress color='secondary' />}
                 </TableCell>
                 <TableCell align='center' style={{color:'#228B22', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {allLoaded ? allRecovered : <CircularProgress color='secondary' />}
+                  {allLoaded ? allData['recovered'] : <CircularProgress color='secondary' />}
                 </TableCell>
                 <TableCell align='center' style={{color:'#FFFF00', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {allLoaded ? allActive : <CircularProgress color='secondary' />}
+                  {allLoaded ? allData['active'] : <CircularProgress color='secondary' />}
                 </TableCell>
                 <TableCell align='center' style={{color:'#A9A9A9', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {allLoaded ? allCountries : <CircularProgress color='secondary' />}
+                  {allLoaded ? allData['affectedCountries'] : <CircularProgress color='secondary' />}
                 </TableCell>
               </TableRow>
             </TableBody>
@@ -295,25 +256,25 @@ export default function Cases() {
             <TableBody>
               <TableRow>
                 <TableCell align='center' style={{color:'#FFA500', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {!loading ? cases : ''}
+                  {!loading ? countryData['cases'] : ''}
                 </TableCell>
                 <TableCell align='center' style={{color:'red', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {!loading ? deaths : ''}
+                  {!loading ? countryData['deaths'] : ''}
                 </TableCell>
                 <TableCell align='center' style={{color:'#228B22', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {!loading ? recovered : ''}
+                  {!loading ? countryData['recovered'] : ''}
                 </TableCell>
                 <TableCell align='center' style={{color:'#FFFF00', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {!loading ? active : ''}
+                  {!loading ? countryData['active'] : ''}
                 </TableCell>
                 <TableCell align='center' style={{color:'#FFA500', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {!loading ? today : ''}
+                  {!loading ? countryData['todayCases'] : ''}
                 </TableCell>
                 <TableCell align='center' style={{color:'red', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {!loading ? todayDeaths : ''}
+                  {!loading ? countryData['todayDeaths'] : ''}
                 </TableCell>
                 <TableCell align='center' style={{color:'#FF6347', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {!loading ? critical : ''}
+                  {!loading ? countryData['critical'] : ''}
                 </TableCell>
               </TableRow>
             </TableBody>
