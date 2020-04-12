@@ -142,9 +142,10 @@ export default function Cases() {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Typography paragraph variant='h4' style={{color: 'orange', fontWeight: 'bold', marginBottom: '-5px'}}>
-          <FontAwesomeIcon icon={faGlobeAmericas} size='1x' style={{ marginRight: '20px' }}></FontAwesomeIcon>
+          {/* <FontAwesomeIcon icon={faGlobeAmericas} size='1x' style={{ marginRight: '20px' }}></FontAwesomeIcon> */}
             Worldwide Statistics
-          <FontAwesomeIcon icon={faChartLine} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon>
+            <FontAwesomeIcon icon={faGlobeAmericas} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon>
+          {/* <FontAwesomeIcon icon={faChartLine} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon> */}
         </Typography>
         <br></br>
         <TableContainer component={Paper} style={{borderColor:'#B0C4DE'}}>
@@ -171,19 +172,19 @@ export default function Cases() {
             <TableBody>
               <TableRow>
                 <TableCell align='center' style={{color:'#FFA500', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {allLoaded ? allData['cases'] : <CircularProgress color='secondary' />}
+                  {allLoaded ? allData['cases'] : <CircularProgress disableShrink color='secondary' />}
                 </TableCell>
                 <TableCell align='center' style={{color:'red', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {allLoaded ? allData['deaths'] : <CircularProgress color='secondary' />}
+                  {allLoaded ? allData['deaths'] : <CircularProgress disableShrink color='secondary' />}
                 </TableCell>
                 <TableCell align='center' style={{color:'#228B22', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {allLoaded ? allData['recovered'] : <CircularProgress color='secondary' />}
+                  {allLoaded ? allData['recovered'] : <CircularProgress disableShrink color='secondary' />}
                 </TableCell>
                 <TableCell align='center' style={{color:'#FFFF00', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {allLoaded ? allData['active'] : <CircularProgress color='secondary' />}
+                  {allLoaded ? allData['active'] : <CircularProgress disableShrink color='secondary' />}
                 </TableCell>
                 <TableCell align='center' style={{color:'#A9A9A9', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {allLoaded ? allData['affectedCountries'] : <CircularProgress color='secondary' />}
+                  {allLoaded ? allData['affectedCountries'] : <CircularProgress disableShrink color='secondary' />}
                 </TableCell>
               </TableRow>
             </TableBody>
@@ -191,9 +192,10 @@ export default function Cases() {
         </TableContainer>
         <br></br><br></br><br></br><br></br>
         <Typography paragraph variant='h4' style={{color: 'orange', marginBottom: '-5px', fontWeight: 'bold'}}>
-          <FontAwesomeIcon icon={faFlag} size='1x' style={{ marginRight: '20px' }}></FontAwesomeIcon>
+          {/* <FontAwesomeIcon icon={faFlag} size='1x' style={{ marginRight: '20px' }}></FontAwesomeIcon> */}
             Country Statistics
-          <FontAwesomeIcon icon={faChartLine} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon>
+            <FontAwesomeIcon icon={faFlag} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon>
+          {/* <FontAwesomeIcon icon={faChartLine} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon> */}
         </Typography>
         <br></br>
         <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>

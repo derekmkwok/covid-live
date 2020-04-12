@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
     // backgroundColor: '#424242',
     backgroundColor: '#252525',
-    borderColor: '#F8F8FF'
+    borderColor: '#a3a3a3'
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
@@ -76,8 +76,9 @@ export default function PermanentDrawerLeft() {
         <AppBar position="fixed" className={classes.appBar} style={{backgroundColor:'#252525'}}>
           <Toolbar>
             <Typography variant="h3" noWrap style={{margin: 'auto', color: '#FFD700', fontWeight: 'bold'}}>
-              <FontAwesomeIcon icon={faLungsVirus} style={{marginRight: '10px'}}></FontAwesomeIcon>
+              {/* <FontAwesomeIcon icon={faLungsVirus} style={{marginRight: '10px'}}></FontAwesomeIcon> */}
               COVID-19 Live Tracker
+              <FontAwesomeIcon icon={faLungsVirus} style={{marginLeft: '20px'}}></FontAwesomeIcon>
             </Typography>
           </Toolbar>
         </AppBar>
