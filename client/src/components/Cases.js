@@ -196,9 +196,6 @@ export default function Cases() {
           <FontAwesomeIcon icon={faChartLine} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon>
         </Typography>
         <br></br>
-        {/* <Typography paragraph variant='h6' style={{color: '#3399ff'}}>
-          Enter the name of a country below (or enter world):
-        </Typography> */}
         <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
           <TextField 
             id="outlined-basic" 

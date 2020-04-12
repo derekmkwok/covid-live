@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import SearchIcon from '@material-ui/icons/Search';
 
 // recharts import
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label } from 'recharts';
 
 const drawerWidth = 240;
 
@@ -67,7 +67,8 @@ export default function Charts() {
   const classes = useStyles();
 
   // hooks
-  const [country, setCountry] = useState('');
+  const [country, setCountry] = useState('canada');  // initial country as Canada
+  const [legend, setLegend] = useState('canada');  // country name legend will use
   const [allData, setAllData] = useState([]);
   const [cache, setCache] = useState({});  // local cache to store arrays of time series data
   const [loading, setLoading] = useState(false);
@@ -139,6 +140,7 @@ export default function Charts() {
     if (cache[country] !== undefined) {
       // exists in cache - use cached data
       setAllData(cache[country]);
+      setLegend(country);
     } else {
       console.log('not in cache');
       setLoading(false);
@@ -159,15 +161,14 @@ export default function Charts() {
     <div>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <button onClick={onClick}>TEST CONSOLE LOG BUTTON</button>
-        {/* <Typography paragraph variant='h4' style={{color: '#ADD8E6', textDecoration: 'underline', margin: 'auto', fontWeight: 'bold'}}> */}
+        {/* <button onClick={onClick}>TEST CONSOLE LOG BUTTON</button> */}
         <Typography paragraph variant='h4' style={{color: 'orange', fontWeight: 'bold', marginBottom: '-5px'}}>
           {/* <FontAwesomeIcon icon={faFlag} size='1x' style={{ marginRight: '20px' }}></FontAwesomeIcon> */}
             Statistics Visualized
           {/* <FontAwesomeIcon icon={faChartLine} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon> */}
         </Typography>
         <br></br> 
-        <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
+        <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit} style={{marginBottom:'25px'}}>
           <TextField 
             id="outlined-basic" 
             label="Enter Country Here" 
@@ -200,12 +201,17 @@ export default function Charts() {
               width={800}
               height={500}
               data={allData}
+              style={{marginBottom:'50px'}}
             >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis tick={{fill:'#F8F8FF'}} dataKey="date" />
+              <XAxis tick={{fill:'#F8F8FF'}} dataKey="date">
+                {/* <Label value="Date" offset={0} position="bottom" style={{ fill:'#F8F8FF' }} /> */}
+              </XAxis>
               <YAxis tick={{fill:'#F8F8FF'}} />
               <Tooltip />
-              <Legend />
+              <Legend verticalAlign='top' formatter={(value, entry, index) => {
+                return <span style={{ color:'#F8F8FF', fontSize:'16px' }}>{value.toUpperCase()} CASES IN {legend.toUpperCase()}</span>}
+              } />
               <Line type="monotone" dataKey="confirmed" stroke="#FFA500" activeDot={{ r: 5 }} />
             </LineChart>
           </React.Fragment>
@@ -216,12 +222,15 @@ export default function Charts() {
               width={800}
               height={500}
               data={allData}
+              style={{marginBottom:'50px'}}
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis tick={{fill:'#F8F8FF'}} dataKey="date" />
               <YAxis tick={{fill:'#F8F8FF'}} />
               <Tooltip />
-              <Legend />
+              <Legend verticalAlign='top' formatter={(value, entry, index) => {
+                return <span style={{ color:'#F8F8FF', fontSize:'16px' }}>{value.toUpperCase()} CASES IN {legend.toUpperCase()}</span>}
+              } />
               <Line type="monotone" dataKey="recovered" stroke="#228B22" activeDot={{ r: 5 }} />
             </LineChart>
           </React.Fragment>
@@ -237,7 +246,9 @@ export default function Charts() {
               <XAxis tick={{fill:'#F8F8FF'}} dataKey="date" />
               <YAxis tick={{fill:'#F8F8FF'}} />
               <Tooltip />
-              <Legend />
+              <Legend verticalAlign='top' formatter={(value, entry, index) => {
+                return <span style={{ color:'#F8F8FF', fontSize:'16px' }}>{value.toUpperCase()} IN {legend.toUpperCase()}</span>}
+              } />
               <Line type="monotone" dataKey="deaths" stroke="red" activeDot={{ r: 5 }} />
             </LineChart>
           </React.Fragment>
