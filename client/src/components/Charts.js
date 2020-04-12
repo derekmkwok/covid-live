@@ -189,7 +189,7 @@ export default function Charts() {
               }
             }} 
           />
-          <Button variant="outlined" color="primary" type='submit' disabled={loading}>
+          <Button variant="outlined" color="primary" type='submit' disabled={loading} style={{marginLeft:'25px'}}>
             Search
           </Button>
           { loading ? <CircularProgress disableShrink color='secondary' style={{ marginLeft: '25px', marginTop: '6px'}} /> : ''}

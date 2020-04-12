@@ -11,6 +11,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import SearchIcon from '@material-ui/icons/Search';
 
 // Font-Awesome imports
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -219,7 +220,7 @@ export default function Cases() {
               }
             }} 
           />
-          <Button variant="outlined" color="primary" type='submit'>
+          <Button variant="outlined" color="secondary" type='submit' style={{marginLeft:'25px'}} endIcon={<SearchIcon />}>
             Search
           </Button>
           { loading ? <CircularProgress disableShrink color='secondary' style={{ marginLeft: '25px', marginTop: '6px'}} /> : ''}
