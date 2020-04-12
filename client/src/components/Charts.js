@@ -160,7 +160,7 @@ export default function Charts() {
         <div className={classes.toolbar} />
         <button onClick={onClick}>TEST CONSOLE LOG BUTTON</button>
         {/* <Typography paragraph variant='h4' style={{color: '#ADD8E6', textDecoration: 'underline', margin: 'auto', fontWeight: 'bold'}}> */}
-        <Typography paragraph variant='h4' style={{color: 'orange', textDecoration: 'underline', margin: 'auto', fontWeight: 'bold'}}>
+        <Typography paragraph variant='h4' style={{color: 'orange', fontWeight: 'bold', marginBottom: '-5px'}}>
           {/* <FontAwesomeIcon icon={faFlag} size='1x' style={{ marginRight: '20px' }}></FontAwesomeIcon> */}
             Statistics Visualized
           {/* <FontAwesomeIcon icon={faChartLine} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon> */}

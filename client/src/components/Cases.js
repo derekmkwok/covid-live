@@ -141,7 +141,7 @@ export default function Cases() {
     <div>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Typography paragraph variant='h4' style={{color: 'orange', fontWeight: 'bold', marginBottom: '-10px'}}>
+        <Typography paragraph variant='h4' style={{color: 'orange', fontWeight: 'bold', marginBottom: '-5px'}}>
           <FontAwesomeIcon icon={faGlobeAmericas} size='1x' style={{ marginRight: '20px' }}></FontAwesomeIcon>
             Worldwide Statistics
           <FontAwesomeIcon icon={faChartLine} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon>
@@ -190,7 +190,7 @@ export default function Cases() {
           </Table>
         </TableContainer>
         <br></br><br></br><br></br><br></br>
-        <Typography paragraph variant='h4' style={{color: 'orange', marginBottom: '-10px', fontWeight: 'bold'}}>
+        <Typography paragraph variant='h4' style={{color: 'orange', marginBottom: '-5px', fontWeight: 'bold'}}>
           <FontAwesomeIcon icon={faFlag} size='1x' style={{ marginRight: '20px' }}></FontAwesomeIcon>
             Country Statistics
           <FontAwesomeIcon icon={faChartLine} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon>
