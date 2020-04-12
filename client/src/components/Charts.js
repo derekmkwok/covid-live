@@ -88,6 +88,7 @@ export default function Charts() {
         //  });
          // setAllData(allData.concat(data));
          // setAllLoaded(true);
+         setAllData(data['canada']);  // have Canada be default (initial) display for charts
          console.log(data);
          setLoading(false);
        } else {
@@ -166,9 +167,6 @@ export default function Charts() {
           {/* <FontAwesomeIcon icon={faChartLine} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon> */}
         </Typography>
         <br></br> 
-        {/* <Typography paragraph variant='h6' style={{color: '#3399ff'}}>
-          Enter the name of a country below:
-        </Typography> */}
         <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
           <TextField 
             id="outlined-basic" 
@@ -208,7 +206,7 @@ export default function Charts() {
               <YAxis tick={{fill:'#F8F8FF'}} />
               <Tooltip />
               <Legend />
-              <Line type="monotone" dataKey="confirmed" stroke="#FFA500" activeDot={{ r: 8 }} />
+              <Line type="monotone" dataKey="confirmed" stroke="#FFA500" activeDot={{ r: 5 }} />
             </LineChart>
           </React.Fragment>
         : '' }
@@ -224,7 +222,7 @@ export default function Charts() {
               <YAxis tick={{fill:'#F8F8FF'}} />
               <Tooltip />
               <Legend />
-              <Line type="monotone" dataKey="recovered" stroke="#228B22" />
+              <Line type="monotone" dataKey="recovered" stroke="#228B22" activeDot={{ r: 5 }} />
             </LineChart>
           </React.Fragment>
         : '' }
@@ -240,7 +238,7 @@ export default function Charts() {
               <YAxis tick={{fill:'#F8F8FF'}} />
               <Tooltip />
               <Legend />
-              <Line type="monotone" dataKey="deaths" stroke="red" />
+              <Line type="monotone" dataKey="deaths" stroke="red" activeDot={{ r: 5 }} />
             </LineChart>
           </React.Fragment>
         : '' }
