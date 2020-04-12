@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
+import SearchIcon from '@material-ui/icons/Search';
 
 // recharts import
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
@@ -36,24 +37,24 @@ const useStyles = makeStyles((theme) => ({
     height: '100%'
   },
   notchedOutline: {
-    borderColor: 'orange'
+    borderColor: '#3399ff'
   },
   label: {
-    color: 'orange',
+    color: '#3399ff',
     "&.Mui-focused": {
-      color: "orange"
+      color: "#3399ff"
     }
   },
   focus: {
-    borderColor: '#6495ED',
+    borderColor: '#3399ff',
   },
   outlinedInput: {
     '&$focus $notchedOutline': {
-      borderColor: 'orange',
-      color: 'orange'
+      borderColor: '#3399ff',
+      color: '#3399ff'
     },
     "&:hover:not($disabled):not($focused):not($error) $notchedOutline": {
-      borderColor: 'orange'
+      borderColor: '#3399ff'
     }
   },
   table: {
@@ -165,9 +166,9 @@ export default function Charts() {
           {/* <FontAwesomeIcon icon={faChartLine} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon> */}
         </Typography>
         <br></br> 
-        <Typography paragraph variant='h6' style={{color: '#3399ff'}}>
+        {/* <Typography paragraph variant='h6' style={{color: '#3399ff'}}>
           Enter the name of a country below:
-        </Typography>
+        </Typography> */}
         <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
           <TextField 
             id="outlined-basic" 
@@ -189,7 +190,7 @@ export default function Charts() {
               }
             }} 
           />
-          <Button variant="outlined" color="primary" type='submit' disabled={loading} style={{marginLeft:'25px'}}>
+          <Button variant="outlined" color="secondary" type='submit' disabled={loading} style={{marginLeft:'25px'}} endIcon={<SearchIcon />}>
             Search
           </Button>
           { loading ? <CircularProgress disableShrink color='secondary' style={{ marginLeft: '25px', marginTop: '6px'}} /> : ''}

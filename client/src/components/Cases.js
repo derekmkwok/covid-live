@@ -47,24 +47,24 @@ const useStyles = makeStyles((theme) => ({
     height: '100%'
   },
   notchedOutline: {
-    borderColor: '#6495ED'
+    borderColor: '#3399ff'
   },
   label: {
-    color: '#6495ED',
+    color: '#3399ff',
     "&.Mui-focused": {
-      color: "#6495ED"
+      color: "#3399ff"
     }
   },
   focus: {
-    borderColor: '#6495ED',
+    borderColor: '#3399ff',
   },
   outlinedInput: {
     '&$focus $notchedOutline': {
-      borderColor: '#6495ED',
-      color: '#6495ED'
+      borderColor: '#3399ff',
+      color: '#3399ff'
     },
     "&:hover:not($disabled):not($focused):not($error) $notchedOutline": {
-      borderColor: '#6495ED'
+      borderColor: '#3399ff'
     }
   },
   table: {
@@ -141,7 +141,7 @@ export default function Cases() {
     <div>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Typography paragraph variant='h4' style={{color: 'orange', textDecoration: 'underline', margin: 'auto', fontWeight: 'bold'}}>
+        <Typography paragraph variant='h4' style={{color: 'orange', fontWeight: 'bold', marginBottom: '-10px'}}>
           <FontAwesomeIcon icon={faGlobeAmericas} size='1x' style={{ marginRight: '20px' }}></FontAwesomeIcon>
             Worldwide Statistics
           <FontAwesomeIcon icon={faChartLine} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon>
@@ -190,15 +190,15 @@ export default function Cases() {
           </Table>
         </TableContainer>
         <br></br><br></br><br></br><br></br>
-        <Typography paragraph variant='h4' style={{color: 'orange', textDecoration: 'underline', margin: 'auto', fontWeight: 'bold'}}>
+        <Typography paragraph variant='h4' style={{color: 'orange', marginBottom: '-10px', fontWeight: 'bold'}}>
           <FontAwesomeIcon icon={faFlag} size='1x' style={{ marginRight: '20px' }}></FontAwesomeIcon>
             Country Statistics
           <FontAwesomeIcon icon={faChartLine} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon>
         </Typography>
         <br></br>
-        <Typography paragraph variant='h6' style={{color: '#3399ff'}}>
+        {/* <Typography paragraph variant='h6' style={{color: '#3399ff'}}>
           Enter the name of a country below (or enter world):
-        </Typography>
+        </Typography> */}
         <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
           <TextField 
             id="outlined-basic" 

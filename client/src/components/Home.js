@@ -54,7 +54,7 @@ export default function Home() {
           <FontAwesomeIcon icon={faLaptopHouse} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon>
         </Typography>
         <br></br>
-        <Typography paragraph variant='h5' style={{color: '#6495ED'}}>
+        <Typography paragraph variant='h5' style={{color: '#3399ff'}}>
           From the navigation bar on the left, please select:
         </Typography>
         <Typography paragraph variant='h6' style={{color: '#B0C4DE'}}>
