@@ -17,7 +17,6 @@ import SearchIcon from '@material-ui/icons/Search';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFlag } from '@fortawesome/free-solid-svg-icons';
 import { faGlobeAmericas } from '@fortawesome/free-solid-svg-icons';
-import { faChartLine } from '@fortawesome/free-solid-svg-icons';
 
 const drawerWidth = 240;
 
@@ -142,10 +141,8 @@ export default function Cases() {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Typography paragraph variant='h4' style={{color: 'orange', fontWeight: 'bold', marginBottom: '-5px'}}>
-          {/* <FontAwesomeIcon icon={faGlobeAmericas} size='1x' style={{ marginRight: '20px' }}></FontAwesomeIcon> */}
             Worldwide Statistics
             <FontAwesomeIcon icon={faGlobeAmericas} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon>
-          {/* <FontAwesomeIcon icon={faChartLine} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon> */}
         </Typography>
         <br></br>
         <TableContainer component={Paper} style={{borderColor:'#B0C4DE'}}>
@@ -192,10 +189,8 @@ export default function Cases() {
         </TableContainer>
         <br></br><br></br><br></br><br></br>
         <Typography paragraph variant='h4' style={{color: 'orange', marginBottom: '-5px', fontWeight: 'bold'}}>
-          {/* <FontAwesomeIcon icon={faFlag} size='1x' style={{ marginRight: '20px' }}></FontAwesomeIcon> */}
             Country Statistics
             <FontAwesomeIcon icon={faFlag} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon>
-          {/* <FontAwesomeIcon icon={faChartLine} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon> */}
         </Typography>
         <br></br>
         <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>

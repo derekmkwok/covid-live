@@ -2,7 +2,7 @@
 
 ## WORK IN PROGRESS (DEVELOPMENT STAGE)
 * Frontend - Working on finishing styling for front end
-* Backend - Initial routes complete. Implemented API routing for time series data
+* Backend - Mostly completed
 * Planning to deploy once minimum viable product completed
 
 ## Technologies
@@ -20,7 +20,7 @@
 * UI styled with Material-UI and Font Awesome Icons
 * Postman tool utilized for testing API calls
 * Features to be implemented:
-  * Data regarding all cases - DONE BACKEND - FRONTEND IN PROGRESS
-  * Data filtered by country - DONE BACKEND - FRONTEND IN PROGRESS
-  * Time series data visualized - DONE BACKEND - FRONTEND IN PROGRESS
-  * Information/resources regarding COVID-19 and where/how to seek help - IN PROGRESS FRONTEND
+  * Data regarding all cases - DONE BACKEND - MOSTLY DONE FRONTEND
+  * Data filtered by country - DONE BACKEND - MOSTLY DONE FRONTEND
+  * Time series data visualized - DONE BACKEND - MOSTLY DONE FRONTEND
+  * Information/resources regarding COVID-19 and where/how to seek help - MOSTLY DONE FRONTEND

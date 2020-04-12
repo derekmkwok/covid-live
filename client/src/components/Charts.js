@@ -91,8 +91,6 @@ export default function Charts() {
         //  setCache(prev => {
         //    return {...prev, [country]:data}
         //  });
-         // setAllData(allData.concat(data));
-         // setAllLoaded(true);
          setAllData(data['canada']);  // have Canada be default (initial) display for charts
          console.log(data);
          setLoading(false);
@@ -154,12 +152,12 @@ export default function Charts() {
   ///////////// TO DO: ADD SNACK BAR POPUPS ///////////////////
 
   // testing if data really was received and changed state of data
-  const onClick = (event) => {
-    console.log(allData);
-    console.log(cache);
-    console.log(country);
-    console.log(Object.keys(cache));
-  };
+  // const onClick = (event) => {
+  //   console.log(allData);
+  //   console.log(cache);
+  //   console.log(country);
+  //   console.log(Object.keys(cache));
+  // };
 
   return (
     <div>
@@ -167,7 +165,6 @@ export default function Charts() {
         <div className={classes.toolbar} />
         {/* <button onClick={onClick}>TEST CONSOLE LOG BUTTON</button> */}
         <Typography paragraph variant='h4' style={{color: 'orange', fontWeight: 'bold', marginBottom: '-5px'}}>
-          {/* <FontAwesomeIcon icon={faFlag} size='1x' style={{ marginRight: '20px' }}></FontAwesomeIcon> */}
             Statistics Visualized
           <FontAwesomeIcon icon={faChartLine} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon>
         </Typography>
