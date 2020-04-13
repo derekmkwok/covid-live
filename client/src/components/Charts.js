@@ -5,13 +5,15 @@ import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
 import SearchIcon from '@material-ui/icons/Search';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 // Font-Awesome imports
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartLine } from '@fortawesome/free-solid-svg-icons';
 
 // recharts import
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 const drawerWidth = 240;
 
@@ -69,6 +71,10 @@ const useStyles = makeStyles((theme) => ({
 
 const root = window.location.protocol + '//' + window.location.host;  // URL for web app
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 export default function Charts() {
   const classes = useStyles();
 
@@ -78,6 +84,7 @@ export default function Charts() {
   const [allData, setAllData] = useState([]);
   const [cache, setCache] = useState({});  // local cache to store arrays of time series data
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
 
   // initial render, fetch all the data
   useEffect(() => {
@@ -87,20 +94,13 @@ export default function Charts() {
      .then(response => response.json())
      .then(data => {
        if (data !== undefined || data !== null) {
-         // setAllData(prev => [...prev,...data]);
          setCache(data);
-         // store data in cache
-        //  setCache(prev => {
-        //    return {...prev, [country]:data}
-        //  });
          setAllData(data['canada']);  // have Canada be default (initial) display for charts
-         console.log(data);
          setLoading(false);
        } else {
          setLoading(false);
        }
      })
-     .then(() => console.log(allData))
      .catch(err => {
        setLoading(false);
        console.log('Error fetching data');
@@ -135,12 +135,15 @@ export default function Charts() {
       case('taiwan'):
         search = 'taiwan*';
         break;
+      default:
+        // if not any of cases, no change to search
     }
     setCountry(search); // setCountry is asnyc, triggers re-render, use useEffect for render changes
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setOpen(true);
     if (cache[country] !== undefined) {
       // exists in cache - use cached data
       setAllData(cache[country]);
@@ -149,6 +152,14 @@ export default function Charts() {
       console.log('not in cache');
       setLoading(false);
     }
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
   };
 
   ///////////// TO DO: ADD SNACK BAR POPUPS ///////////////////
@@ -195,6 +206,11 @@ export default function Charts() {
           <Button variant="outlined" color="secondary" type='submit' disabled={loading} style={{marginLeft:'25px'}} endIcon={<SearchIcon />}>
             Search
           </Button>
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success">
+              This is a success message!
+            </Alert>
+          </Snackbar>
           { loading ? <CircularProgress disableShrink color='secondary' style={{ marginLeft: '25px', marginTop: '6px'}} /> : ''}
         </form>
         <br></br>
