@@ -26,13 +26,13 @@ const getCountry = (req, res) => {
 
 // data for ALL countries in one array of objects
 const getAllCountries = (req, res) => {
-  console.log('asdf');
   fetch('https://corona.lmao.ninja/countries?sort=country')
     .then(response => response.json())
     .then(data => {
-      const canada = data.find(obj => obj['country'] === "Canada");  // example: fetching one country from array
-      console.log(canada);
-      // console.log(data);
+      // try caching all countries - similar to charts page?
+      // const canada = data.find(obj => obj['country'] === "Canada");  // example: fetching one country from array
+      // console.log(canada);
+      // // console.log(data);
       return res.send(data);
     })
     .catch(err => console.log(`Error found: ${err}`));

@@ -67,6 +67,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const root = window.location.protocol + '//' + window.location.host;  // URL for web app
+
 export default function Charts() {
   const classes = useStyles();
 

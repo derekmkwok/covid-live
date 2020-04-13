@@ -35,12 +35,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const root = window.location.protocol + '//' + window.location.host;
+const root = window.location.protocol + '//' + window.location.host;  // URL for web app
 
 export default function Home() {
   const classes = useStyles();
-
-  // TO DO UPDATE HOME PAGE, MOVED STATS TO CASES PAGE, ADD ABOUT?
 
   return (
     <div>
