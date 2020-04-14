@@ -1,9 +1,9 @@
 # COVID-19 Live Data Tracker App
 
 ## WORK IN PROGRESS (DEVELOPMENT STAGE)
-* Frontend - Working on finishing styling for front end
+* Frontend - Mostly completed
 * Backend - Mostly completed
-* Planning to deploy once minimum viable product completed
+* Planning to deploy once minimum viable product completed - In process of deploying
 
 ## Technologies
 * React
@@ -20,7 +20,7 @@
 * UI styled with Material-UI and Font Awesome Icons
 * Postman tool utilized for testing API calls
 * Features to be implemented:
-  * Data regarding all cases - DONE BACKEND - MOSTLY DONE FRONTEND
-  * Data filtered by country - DONE BACKEND - MOSTLY DONE FRONTEND
-  * Time series data visualized - DONE BACKEND - MOSTLY DONE FRONTEND
-  * Information/resources regarding COVID-19 and where/how to seek help - MOSTLY DONE FRONTEND
+  * Data regarding all cases - MOSTLY DONE
+  * Data filtered by country - MOSTLY DONE
+  * Time series data visualized - MOSTLY DONE
+  * Information/resources regarding COVID-19 and where/how to seek help - MOSTLY DONE
