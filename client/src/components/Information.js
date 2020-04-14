@@ -59,7 +59,6 @@ export default function Information() {
           <b>Some Best Practices:
           <FontAwesomeIcon icon={faHandsWash} size='2x' style={{ marginLeft: '10px', color: '#0066cc' }}></FontAwesomeIcon></b>
         </Typography>
-          {/* Using ul tag throws a warning error in console */}
         <Typography paragraph variant='h6' style={{color: '#B0C4DE'}}>
           <li style={{marginLeft: '40px'}}>Wash hands with soap frequently</li>
           <li style={{marginLeft: '40px'}}>Use hand sanitizer</li>

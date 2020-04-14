@@ -117,7 +117,7 @@ export default function Cases() {
         setAllLoaded(true);
       })
       .catch(err => {
-        console.log('Error fetching data');
+        // console.log('Error fetching data');
       });
     fetch(`http://localhost:5000/country/${country}`)
       .then(response => response.json())
@@ -140,15 +140,15 @@ export default function Cases() {
         setOpenLoad(false);
         setOpenError(true);
         setLoading(false);
-        console.log('Error fetching data');
+        // console.log('Error fetching data');
       });
   }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(country);
+    // console.log(country);
     // fetch(`${root}/all`)
-    console.log(cache);
+    // console.log(cache);
     if (cache[country.toLowerCase()] !== undefined) {
       setOpen(false);
       setOpenError(false);
@@ -185,7 +185,7 @@ export default function Cases() {
           setOpenLoad(false);
           setOpenError(true);
           setLoading(false);
-          console.log('Error fetching data');
+          // console.log('Error fetching data');
         });
     }
   };

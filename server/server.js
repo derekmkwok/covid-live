@@ -5,7 +5,6 @@ const express = require('express');
 
 // middleware
 const cors = require('cors');  // cross origin resource sharing to allow for different origins to communicate
-// const bodyParser = require('body-parser');  // parses requests into usable format
 const helmet = require('helmet');  // security
 const morgan = require('morgan');  // logging
 
@@ -17,7 +16,6 @@ const app = express();
 const frontendPort = 3000;
 
 app.use(cors({ origin: `http://localhost:${frontendPort}` }));  // cross origin resource sharing
-// app.use(bodyParser.json());
 app.use(helmet());  // security for headers
 app.use(morgan('combined'));  // logging
 
@@ -30,4 +28,4 @@ app.get('/time', time.getTime);
 
 const backendPort = process.env.PORT || 5000;
 
-app.listen(backendPort, () => console.log(`App running on port ${backendPort} - http://localhost:${backendPort}`));
+app.listen(backendPort, () => console.log(`App running on port ${backendPort}`));

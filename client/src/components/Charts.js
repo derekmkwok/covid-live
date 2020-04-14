@@ -89,6 +89,7 @@ export default function Charts() {
   const [openWarning, setOpenWarning] = useState(false);
   const [openLoad, setOpenLoad] = useState(false);
   const [openCountry, setOpenCountry] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   // initial render, fetch all the data
   useEffect(() => {
@@ -103,6 +104,7 @@ export default function Charts() {
           setCache(data);
           setAllData(data['canada']);  // have Canada be default (initial) display for charts
           setLoading(false);
+          setLoaded(true);
         } else {
           setLoading(false);
           setOpenError(true);
@@ -113,7 +115,7 @@ export default function Charts() {
         setLoading(false);
         setOpenLoad(false);
         setOpenError(true);
-        console.log('Error fetching data');
+        // console.log('Error fetching data');
       });
   }, []);
 
@@ -157,11 +159,18 @@ export default function Charts() {
       // exists in cache - use cached data
       setAllData(cache[country]);
       setLegend(country);
+      setOpen(false);
+      setOpenError(false);
+      setOpenLoad(false);
+      setOpenWarning(false);
       setOpenCountry(true);
     } else {
-      console.log('not in cache');
+      // console.log('not in cache');
+      setOpen(false);
+      setOpenError(false);
+      setOpenLoad(false);
+      setOpenCountry(false);
       setOpenWarning(true);
-      // setLoading(false);
     }
   };
 
@@ -176,21 +185,10 @@ export default function Charts() {
     setOpenCountry(false);
   };
 
-  ///////////// TO DO: ADD SNACK BAR POPUPS ///////////////////
-
-  // testing if data really was received and changed state of data
-  // const onClick = (event) => {
-  //   console.log(allData);
-  //   console.log(cache);
-  //   console.log(country);
-  //   console.log(Object.keys(cache));
-  // };
-
   return (
     <div>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {/* <button onClick={onClick}>TEST CONSOLE LOG BUTTON</button> */}
         <Typography paragraph variant='h4' style={{color: 'orange', fontWeight: 'bold', marginBottom: '-5px'}}>
             Statistics Visualized
           <FontAwesomeIcon icon={faChartLine} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon>
@@ -217,7 +215,7 @@ export default function Charts() {
               }
             }} 
           />
-          <Button variant="outlined" color="secondary" type='submit' disabled={loading} style={{marginLeft:'25px'}} endIcon={<SearchIcon />}>
+          <Button variant="outlined" color="secondary" type='submit' disabled={!loaded} style={{marginLeft:'25px'}} endIcon={<SearchIcon />}>
             Search
           </Button>
           <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
@@ -257,9 +255,7 @@ export default function Charts() {
               style={{marginBottom:'50px'}}
             >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis tick={{fill:'#F8F8FF'}} dataKey="date">
-                {/* <Label value="Date" offset={0} position="bottom" style={{ fill:'#F8F8FF' }} /> */}
-              </XAxis>
+              <XAxis tick={{fill:'#F8F8FF'}} dataKey="date" />
               <YAxis tick={{fill:'#F8F8FF'}} />
               <Tooltip />
               <Legend verticalAlign='top' formatter={(value, entry, index) => {
