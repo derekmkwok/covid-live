@@ -1,11 +1,7 @@
 # COVID-19 Live Data Tracker App
 
-## WORK IN PROGRESS (DEVELOPMENT STAGE)
-* Frontend - Mostly completed
-* Backend - Mostly completed
-* Planning to deploy once minimum viable product completed - In process of deploying
-
 ## Technologies
+* Heroku - Deployed to the Heroku cloud platform at https://covidlivetrack.herokuapp.com/
 * React
 * Node
 * Express
@@ -19,8 +15,8 @@
 * React used for the frontend portion of this application
 * UI styled with Material-UI and Font Awesome Icons
 * Postman tool utilized for testing API calls
-* Features to be implemented:
-  * Data regarding all cases - MOSTLY DONE
-  * Data filtered by country - MOSTLY DONE
-  * Time series data visualized - MOSTLY DONE
-  * Information/resources regarding COVID-19 and where/how to seek help - MOSTLY DONE
+* Features:
+  * Data regarding all cases
+  * Data filtered by country
+  * Time series data visualized
+  * Information/resources regarding COVID-19 and where/how to seek help
