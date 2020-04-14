@@ -51,11 +51,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#252525',
     borderColor: '#a3a3a3'
   },
-  // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
-    // backgroundColor: 'theme.palette.background.default',
     backgroundColor: '#282c34',
     padding: theme.spacing(3),
     height: '100%'
