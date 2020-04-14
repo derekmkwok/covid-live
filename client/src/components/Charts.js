@@ -85,24 +85,33 @@ export default function Charts() {
   const [cache, setCache] = useState({});  // local cache to store arrays of time series data
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  const [openError, setOpenError] = useState(false);
+  const [openWarning, setOpenWarning] = useState(false);
+  const [openLoad, setOpenLoad] = useState(false);
+  const [openCountry, setOpenCountry] = useState(false);
 
   // initial render, fetch all the data
   useEffect(() => {
+    setOpenLoad(true);
     setLoading(true);
      // fetch(`${root}/all`)
      fetch(`http://localhost:5000/time`)
      .then(response => response.json())
      .then(data => {
+       setOpenLoad(false);
        if (data !== undefined || data !== null) {
          setCache(data);
          setAllData(data['canada']);  // have Canada be default (initial) display for charts
          setLoading(false);
        } else {
          setLoading(false);
+         setOpenError(true);
        }
      })
+     .then(() => setOpen(true))
      .catch(err => {
        setLoading(false);
+       setOpenError(true);
        console.log('Error fetching data');
      });
   }, []);
@@ -143,14 +152,15 @@ export default function Charts() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setOpen(true);
     if (cache[country] !== undefined) {
       // exists in cache - use cached data
       setAllData(cache[country]);
       setLegend(country);
+      setOpenCountry(true);
     } else {
       console.log('not in cache');
-      setLoading(false);
+      setOpenWarning(true);
+      // setLoading(false);
     }
   };
 
@@ -158,8 +168,11 @@ export default function Charts() {
     if (reason === 'clickaway') {
       return;
     }
-
     setOpen(false);
+    setOpenError(false);
+    setOpenWarning(false);
+    setOpenLoad(false);
+    setOpenCountry(false);
   };
 
   ///////////// TO DO: ADD SNACK BAR POPUPS ///////////////////
@@ -208,9 +221,30 @@ export default function Charts() {
           </Button>
           <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="success">
-              This is a success message!
+              Data Successfully Loaded
             </Alert>
           </Snackbar>
+          <Snackbar open={openError} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="error">
+              Error: Data Unable to Load
+            </Alert>
+          </Snackbar>
+          <Snackbar open={openWarning} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="warning">
+              Country Not Found in Database
+            </Alert>
+          </Snackbar>
+          <Snackbar open={openLoad} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="info">
+              Data Loading...
+            </Alert>
+          </Snackbar>
+          <Snackbar open={openCountry} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success">
+              Country Found: Plotting Data...
+            </Alert>
+          </Snackbar>
+          {/* add country not found snackbar? */}
           { loading ? <CircularProgress disableShrink color='secondary' style={{ marginLeft: '25px', marginTop: '6px'}} /> : ''}
         </form>
         <br></br>
