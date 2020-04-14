@@ -222,7 +222,7 @@ export default function Charts() {
           </Button>
           <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="success">
-              Data Successfully Loaded
+              Time Series Data Successfully Loaded
             </Alert>
           </Snackbar>
           <Snackbar open={openError} autoHideDuration={6000} onClose={handleClose}>
@@ -237,12 +237,12 @@ export default function Charts() {
           </Snackbar>
           <Snackbar open={openLoad} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="info">
-              Data Loading...
+              Time Series Data Loading...
             </Alert>
           </Snackbar>
           <Snackbar open={openCountry} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="success">
-              Country Found: Plotting Data...
+              Country Found: Plotting Data for {legend.toUpperCase()}
             </Alert>
           </Snackbar>
           { loading ? <CircularProgress disableShrink color='secondary' style={{ marginLeft: '25px', marginTop: '6px'}} /> : ''}

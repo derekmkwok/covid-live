@@ -100,6 +100,7 @@ export default function Cases() {
   const [openError, setOpenError] = useState(false);
   const [openWarning, setOpenWarning] = useState(false);
   const [openLoad, setOpenLoad] = useState(false);
+  const [snackCountry, setSnackCountry] = useState('world');
 
   // initial render
   useEffect(() => {
@@ -154,6 +155,7 @@ export default function Cases() {
       setOpenWarning(false);
       setOpenLoad(false);
       cache[country.toLowerCase()]['cases'] === undefined ? setOpenWarning(true) : setOpen(true);
+      setSnackCountry(country);
       setCountryData(cache[country.toLowerCase()]);
     } else {
       setOpen(false);
@@ -168,6 +170,7 @@ export default function Cases() {
           // if country data exists, set all values
           if (!(data === undefined || data === null)) {
             setCountryData(data);
+            setSnackCountry(country);
             data['cases'] === undefined ? setOpenWarning(true) : setOpen(true);
             setCache(prev => {
               return {...prev, [country.toLowerCase()]:data};
@@ -289,7 +292,7 @@ export default function Cases() {
           </Button>
           <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="success">
-              Data Successfully Loaded
+              Data Successfully Loaded: {snackCountry.toUpperCase()}
             </Alert>
           </Snackbar>
           <Snackbar open={openError} autoHideDuration={6000} onClose={handleClose}>
@@ -307,11 +310,6 @@ export default function Cases() {
               Data Loading...
             </Alert>
           </Snackbar>
-          {/* <Snackbar open={openCountry} autoHideDuration={6000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="success">
-              Country Found: Plotting Data...
-            </Alert>
-          </Snackbar> */}
           { loading ? <CircularProgress disableShrink color='secondary' style={{ marginLeft: '25px', marginTop: '6px'}} /> : ''}
         </form>
         <br></br>
