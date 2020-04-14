@@ -20,11 +20,11 @@ app.use(helmet());  // security for headers
 app.use(morgan('combined'));  // logging
 
 // api routes
-app.get('/', (req, res) => res.send('Hello World!'));
 app.get('/all', data.getAll);
 app.get('/country/all', data.getAllCountries);  // need this line above otherwise 'all' is considered a parameter
 app.get('/country/:country', data.getCountry);
 app.get('/time', time.getTime);
+app.get('/', (req, res) => res.send('Hello World!'));
 
 const backendPort = process.env.PORT || 5000;
 
