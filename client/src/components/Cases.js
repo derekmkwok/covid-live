@@ -12,6 +12,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import SearchIcon from '@material-ui/icons/Search';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 // Font-Awesome imports
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -74,6 +76,10 @@ const useStyles = makeStyles((theme) => ({
 
 const root = window.location.protocol + '//' + window.location.host;  // URL for web app
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 export default function Cases() {
   const classes = useStyles();
 
@@ -89,8 +95,19 @@ export default function Cases() {
   // caching data to component
   const [cache, setCache] = useState({})
 
+  // snackbar hooks
+  const [open, setOpen] = useState(false);
+  const [openError, setOpenError] = useState(false);
+  const [openWarning, setOpenWarning] = useState(false);
+  const [openLoad, setOpenLoad] = useState(false);
+
   // initial render
   useEffect(() => {
+    setOpen(false);
+    setOpenError(false);
+    setOpenWarning(false);
+    setOpenLoad(true);
+    setLoading(true);
     // fetch(`${root}/all`)
     fetch(`http://localhost:5000/all`)
       .then(response => response.json())
@@ -101,42 +118,93 @@ export default function Cases() {
       .catch(err => {
         console.log('Error fetching data');
       });
-  }, []);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // fetch(`${root}/all`)
-    console.log(cache);
-    if (cache[country.toLowerCase()] !== undefined) {
-      setCountryData(cache[country.toLowerCase()]);
-    } else {
-      setLoading(true);
-      fetch(`http://localhost:5000/country/${country}`)
+    fetch(`http://localhost:5000/country/${country}`)
       .then(response => response.json())
       .then(data => {
+        setOpenLoad(false);
         // if country data exists, set all values
         if (!(data === undefined || data === null)) {
           setCountryData(data);
+          data['cases'] === undefined ? setOpenWarning(true) : setOpen(true);
           setCache(prev => {
             return {...prev, [country.toLowerCase()]:data};
           });
           setLoading(false);
         } else {
+          setOpenError(true);
           setLoading(false);
         }
       })
       .catch(err => {
+        setOpenLoad(false);
+        setOpenError(true);
         setLoading(false);
         console.log('Error fetching data');
       });
+  }, []);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(country);
+    // fetch(`${root}/all`)
+    console.log(cache);
+    if (cache[country.toLowerCase()] !== undefined) {
+      setOpen(false);
+      setOpenError(false);
+      setOpenWarning(false);
+      setOpenLoad(false);
+      cache[country.toLowerCase()]['cases'] === undefined ? setOpenWarning(true) : setOpen(true);
+      setCountryData(cache[country.toLowerCase()]);
+    } else {
+      setOpen(false);
+      setOpenError(false);
+      setOpenWarning(false);
+      setOpenLoad(true);
+      setLoading(true);
+      fetch(`http://localhost:5000/country/${country}`)
+        .then(response => response.json())
+        .then(data => {
+          setOpenLoad(false);
+          // if country data exists, set all values
+          if (!(data === undefined || data === null)) {
+            setCountryData(data);
+            data['cases'] === undefined ? setOpenWarning(true) : setOpen(true);
+            setCache(prev => {
+              return {...prev, [country.toLowerCase()]:data};
+            });
+            setLoading(false);
+          } else {
+            setOpenError(true);
+            setLoading(false);
+          }
+        })
+        .catch(err => {
+          setOpenLoad(false);
+          setOpenError(true);
+          setLoading(false);
+          console.log('Error fetching data');
+        });
     }
   };
 
   const handleChange = (event) => {
-    setCountry(event.target.value.toLowerCase()); // setCountry is asnyc, triggers re-render, use useEffect for render changes
+    let search = event.target.value.toLowerCase();
+    if (search === '') {
+      // set default search to world if empty string search
+      search = 'world';
+    }
+    setCountry(search); // setCountry is asnyc, triggers re-render, use useEffect for render changes
   };
 
-  ///////////// TO DO: ADD SNACK BAR POPUPS ///////////////////
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+    setOpenError(false);
+    setOpenWarning(false);
+    setOpenLoad(false);
+  };
 
   return (
     <div>
@@ -219,6 +287,31 @@ export default function Cases() {
           <Button variant="outlined" color="secondary" type='submit' style={{marginLeft:'25px'}} endIcon={<SearchIcon />}>
             Search
           </Button>
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success">
+              Data Successfully Loaded
+            </Alert>
+          </Snackbar>
+          <Snackbar open={openError} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="error">
+              Error: Data Unable to Load
+            </Alert>
+          </Snackbar>
+          <Snackbar open={openWarning} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="warning">
+              Country Not Found
+            </Alert>
+          </Snackbar>
+          <Snackbar open={openLoad} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="info">
+              Data Loading...
+            </Alert>
+          </Snackbar>
+          {/* <Snackbar open={openCountry} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success">
+              Country Found: Plotting Data...
+            </Alert>
+          </Snackbar> */}
           { loading ? <CircularProgress disableShrink color='secondary' style={{ marginLeft: '25px', marginTop: '6px'}} /> : ''}
         </form>
         <br></br>

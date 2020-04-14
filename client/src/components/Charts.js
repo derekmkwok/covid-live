@@ -79,7 +79,7 @@ export default function Charts() {
   const classes = useStyles();
 
   // hooks
-  const [country, setCountry] = useState('canada');  // initial country as Canada
+  const [country, setCountry] = useState('');
   const [legend, setLegend] = useState('canada');  // country name legend will use
   const [allData, setAllData] = useState([]);
   const [cache, setCache] = useState({});  // local cache to store arrays of time series data
@@ -94,26 +94,27 @@ export default function Charts() {
   useEffect(() => {
     setOpenLoad(true);
     setLoading(true);
-     // fetch(`${root}/all`)
-     fetch(`http://localhost:5000/time`)
-     .then(response => response.json())
-     .then(data => {
-       setOpenLoad(false);
-       if (data !== undefined || data !== null) {
-         setCache(data);
-         setAllData(data['canada']);  // have Canada be default (initial) display for charts
-         setLoading(false);
-       } else {
-         setLoading(false);
-         setOpenError(true);
-       }
-     })
-     .then(() => setOpen(true))
-     .catch(err => {
-       setLoading(false);
-       setOpenError(true);
-       console.log('Error fetching data');
-     });
+    // fetch(`${root}/all`)
+    fetch(`http://localhost:5000/time`)
+      .then(response => response.json())
+      .then(data => {
+        setOpenLoad(false);
+        if (data !== undefined || data !== null) {
+          setCache(data);
+          setAllData(data['canada']);  // have Canada be default (initial) display for charts
+          setLoading(false);
+        } else {
+          setLoading(false);
+          setOpenError(true);
+        }
+      })
+      .then(() => setOpen(true))
+      .catch(err => {
+        setLoading(false);
+        setOpenLoad(false);
+        setOpenError(true);
+        console.log('Error fetching data');
+      });
   }, []);
 
   const handleChange = (event) => {
@@ -231,7 +232,7 @@ export default function Charts() {
           </Snackbar>
           <Snackbar open={openWarning} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="warning">
-              Country Not Found in Database
+              Country Not Found
             </Alert>
           </Snackbar>
           <Snackbar open={openLoad} autoHideDuration={6000} onClose={handleClose}>
@@ -244,7 +245,6 @@ export default function Charts() {
               Country Found: Plotting Data...
             </Alert>
           </Snackbar>
-          {/* add country not found snackbar? */}
           { loading ? <CircularProgress disableShrink color='secondary' style={{ marginLeft: '25px', marginTop: '6px'}} /> : ''}
         </form>
         <br></br>
