@@ -28,7 +28,7 @@ app.get('/all', data.getAll);
 app.get('/country/all', data.getAllCountries);  // need this line above otherwise 'all' is considered a parameter
 app.get('/country/:country', data.getCountry);
 app.get('/time', time.getTime);
-app.get('/', (req, res) => {
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
