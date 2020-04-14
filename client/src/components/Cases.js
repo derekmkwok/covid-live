@@ -72,8 +72,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const root = window.location.protocol + '//' + window.location.host;  // URL for web app
-
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -107,8 +105,7 @@ export default function Cases() {
     setOpenWarning(false);
     setOpenLoad(true);
     setLoading(true);
-    // fetch(`${root}/all`)
-    fetch(`http://localhost:5000/all`)
+    fetch(`/all`)
       .then(response => response.json())
       .then(data => {
         setAllData(data);
@@ -117,7 +114,7 @@ export default function Cases() {
       .catch(err => {
         // console.log('Error fetching data');
       });
-    fetch(`http://localhost:5000/country/${country}`)
+    fetch(`/country/${country}`)
       .then(response => response.json())
       .then(data => {
         setOpenLoad(false);
@@ -145,7 +142,6 @@ export default function Cases() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // console.log(country);
-    // fetch(`${root}/all`)
     // console.log(cache);
     if (cache[country.toLowerCase()] !== undefined) {
       setOpen(false);
@@ -161,7 +157,7 @@ export default function Cases() {
       setOpenWarning(false);
       setOpenLoad(true);
       setLoading(true);
-      fetch(`http://localhost:5000/country/${country}`)
+      fetch(`/country/${country}`)
         .then(response => response.json())
         .then(data => {
           setOpenLoad(false);

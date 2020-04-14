@@ -67,8 +67,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const root = window.location.protocol + '//' + window.location.host;  // URL for web app
-
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -93,8 +91,7 @@ export default function Charts() {
   useEffect(() => {
     setOpenLoad(true);
     setLoading(true);
-    // fetch(`${root}/all`)
-    fetch(`http://localhost:5000/time`)
+    fetch(`/time`)
       .then(response => response.json())
       .then(data => {
         setOpenLoad(false);
