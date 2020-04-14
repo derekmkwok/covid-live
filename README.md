@@ -20,3 +20,10 @@
   * Data filtered by country
   * Time series data visualized
   * Information/resources regarding COVID-19 and where/how to seek help
+
+## Future Implementations
+* Dropdown as people search for countries
+* Update styling - font, consistent table size
+* Charts with total world data
+* Make snackbar show full country name when searching with abbreviation
+* Consistent country searching between cases and charts page
