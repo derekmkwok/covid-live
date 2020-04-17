@@ -23,6 +23,7 @@
   * Information/resources regarding COVID-19 and where/how to seek help
 
 ## Future Implementations
+* Add source code link
 * Commas with numbers for readability
 * Dropdown as people search for countries
 * Update styling - font, consistent table size
