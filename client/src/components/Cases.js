@@ -77,17 +77,16 @@ function Alert(props) {
 }
 
 // function to add commas to numbers for readability
-function addCommas(str) {
-  let count = 1;
-  for (let i = str.length-1; i > 0; i-- ) {
-    // if (count == 0)
-        // continue;
-    if (count % 3 == 0) {
-        str = str.slice(0,i) + ',' + str.slice(i);
-    }
-    count++;
-  }
-}
+// function addCommas(str) {
+//   let count = 1;
+//   for (let i = str.length-1; i > 0; i-- ) {
+//     if (count % 3 == 0) {
+//         str = str.slice(0,i) + ',' + str.slice(i);
+//     }
+//     count++;
+//   }
+//   return str;
+// }
 
 export default function Cases() {
   const classes = useStyles();
@@ -123,7 +122,16 @@ export default function Cases() {
       .then(data => {
         setOpenLoad(false);
         setOpen(true);
-        setAllData(data);
+        console.log(typeof data['cases'])
+        console.log(String(data['cases']))
+        console.log(String(data['cases']).length)
+        setAllData({
+          cases: addCommas(String(data['cases'])),
+          deaths:
+          recovered:
+          active:
+          affectedCountries:
+        });
         setAllLoaded(true);
       })
       .catch(err => {
@@ -201,6 +209,25 @@ export default function Cases() {
           // console.log('Error fetching data');
         });
     }
+  };
+
+  const addCommas = (str) => {
+    let count = 1;
+    let limit = str.length;
+    for (let i = str.length-1; i > 0; i-- ) {
+      if (count % 3 === 0) {
+          str = str.slice(0,i) + ',' + str.slice(i);
+          console.log(str);
+      }
+      count++;
+      if (count === limit) { break; }
+    }
+    return str;
+    // if (str.length > 3 && str.length < 7) {
+    //   return str.slice(0, str.length-4) + ',' + str.slice(str.length-4,str.length-1);
+    // } else if (str.length > 6 && str.length < 10) {
+    //   return str.slice(0, str.length-7) + ',' + str.slice(str.length-7, str.length-4) + ',' + str.slice(str.length-4,str.length-1);
+    // }
   };
 
   const handleChange = (event) => {
