@@ -76,6 +76,19 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
+// function to add commas to numbers for readability
+function addCommas(str) {
+  let count = 1;
+  for (let i = str.length-1; i > 0; i-- ) {
+    // if (count == 0)
+        // continue;
+    if (count % 3 == 0) {
+        str = str.slice(0,i) + ',' + str.slice(i);
+    }
+    count++;
+  }
+}
+
 export default function Cases() {
   const classes = useStyles();
 
@@ -84,7 +97,7 @@ export default function Cases() {
   const [allLoaded, setAllLoaded] = useState(false);
 
   // country hooks
-  const [country, setCountry] = useState('world');
+  const [country, setCountry] = useState('');
   const [countryData, setCountryData] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -96,7 +109,7 @@ export default function Cases() {
   const [openError, setOpenError] = useState(false);
   const [openWarning, setOpenWarning] = useState(false);
   const [openLoad, setOpenLoad] = useState(false);
-  const [snackCountry, setSnackCountry] = useState('world');
+  const [snackCountry, setSnackCountry] = useState('WORLD');
 
   // initial render
   useEffect(() => {
@@ -104,39 +117,41 @@ export default function Cases() {
     setOpenError(false);
     setOpenWarning(false);
     setOpenLoad(true);
-    setLoading(true);
+    // setLoading(true);
     fetch(`/all`)
       .then(response => response.json())
       .then(data => {
+        setOpenLoad(false);
+        setOpen(true);
         setAllData(data);
         setAllLoaded(true);
       })
       .catch(err => {
         // console.log('Error fetching data');
       });
-    fetch(`/country/${country}`)
-      .then(response => response.json())
-      .then(data => {
-        setOpenLoad(false);
-        // if country data exists, set all values
-        if (!(data === undefined || data === null)) {
-          setCountryData(data);
-          data['cases'] === undefined ? setOpenWarning(true) : setOpen(true);
-          setCache(prev => {
-            return {...prev, [country.toLowerCase()]:data};
-          });
-          setLoading(false);
-        } else {
-          setOpenError(true);
-          setLoading(false);
-        }
-      })
-      .catch(err => {
-        setOpenLoad(false);
-        setOpenError(true);
-        setLoading(false);
-        // console.log('Error fetching data');
-      });
+    // fetch(`/country/${country}`)
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     setOpenLoad(false);
+    //     // if country data exists, set all values
+    //     if (!(data === undefined || data === null)) {
+    //       setCountryData(data);
+    //       data['cases'] === undefined ? setOpenWarning(true) : setOpen(true);
+    //       setCache(prev => {
+    //         return {...prev, [country.toLowerCase()]:data};
+    //       });
+    //       setLoading(false);
+    //     } else {
+    //       setOpenError(true);
+    //       setLoading(false);
+    //     }
+    //   })
+    //   .catch(err => {
+    //     setOpenLoad(false);
+    //     setOpenError(true);
+    //     setLoading(false);
+    //     // console.log('Error fetching data');
+    //   });
   }, []);
 
   const handleSubmit = (event) => {
@@ -164,7 +179,11 @@ export default function Cases() {
           // if country data exists, set all values
           if (!(data === undefined || data === null)) {
             setCountryData(data);
-            setSnackCountry(country);
+            if (data['country'] === undefined) {
+              setSnackCountry(country.toUpperCase());
+            } else {
+              setSnackCountry(data['country']);
+            }
             data['cases'] === undefined ? setOpenWarning(true) : setOpen(true);
             setCache(prev => {
               return {...prev, [country.toLowerCase()]:data};

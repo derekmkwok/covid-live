@@ -2,7 +2,7 @@ const fetch = require('node-fetch');  // import node-fetch module for a node.js 
 
 // call third party API for ALL the general data (cases, deaths, recovered, updated, active, affectedCountries)
 const getAll = (req, res) => {
-  fetch('https://corona.lmao.ninja/all')
+  fetch('https://corona.lmao.ninja/v2/all')
     .then(response => response.json())
     .then(data => {
       return res.send(data);
@@ -13,7 +13,7 @@ const getAll = (req, res) => {
 // data for specific country
 const getCountry = (req, res) => {
   const country = req.params.country;
-  fetch(`https://corona.lmao.ninja/countries/${country}`)
+  fetch(`https://corona.lmao.ninja/v2/countries/${country}`)
     .then(response => response.json())
     .then(data => {
       return res.send(data);
@@ -23,7 +23,7 @@ const getCountry = (req, res) => {
 
 // data for ALL countries in one array of objects
 const getAllCountries = (req, res) => {
-  fetch('https://corona.lmao.ninja/countries?sort=country')
+  fetch('https://corona.lmao.ninja/v2/countries?sort=country')
     .then(response => response.json())
     .then(data => {
       return res.send(data);
