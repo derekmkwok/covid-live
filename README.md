@@ -23,10 +23,7 @@
   * Information/resources regarding COVID-19 and where/how to seek help
 
 ## Future Implementations
-* Add source code link
-* Commas with numbers for readability
 * Dropdown as people search for countries
-* Update styling - font, consistent table size
+* Update styling
 * Charts with total world data
-* Make snackbar show full country name when searching with abbreviation
 * Consistent country searching between cases and charts page
