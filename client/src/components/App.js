@@ -23,6 +23,7 @@ import { faShieldVirus } from '@fortawesome/free-solid-svg-icons';
 import { faHouseUser } from '@fortawesome/free-solid-svg-icons';
 import { faHospital } from '@fortawesome/free-solid-svg-icons';
 import { faChartBar } from '@fortawesome/free-solid-svg-icons';
+import { faCode } from '@fortawesome/free-solid-svg-icons';
 
 // React Router import
 import {
@@ -115,6 +116,16 @@ export default function PermanentDrawerLeft() {
             </Link>
           </List>
           <Divider className={classes.dividerColor} />
+          <List>
+            {/* <Link to='https://github.com/derekmkwok/covid-live' style={{ textDecoration: 'none' }}> */}
+            <a target='_blank' href='https://github.com/derekmkwok/covid-live' style={{ textDecoration: 'none' }}>
+              <ListItem button key='Source Code'>
+                <FontAwesomeIcon icon={faCode} style={{marginRight: '20px'}} size='2x'></FontAwesomeIcon>
+                <ListItemText primary='Source Code' />
+              </ListItem>
+            </a>
+            {/* </Link> */}
+          </List>
         </Drawer>        
 
         <Switch>

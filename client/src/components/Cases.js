@@ -76,18 +76,6 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-// function to add commas to numbers for readability
-// function addCommas(str) {
-//   let count = 1;
-//   for (let i = str.length-1; i > 0; i-- ) {
-//     if (count % 3 == 0) {
-//         str = str.slice(0,i) + ',' + str.slice(i);
-//     }
-//     count++;
-//   }
-//   return str;
-// }
-
 export default function Cases() {
   const classes = useStyles();
 
@@ -97,7 +85,15 @@ export default function Cases() {
 
   // country hooks
   const [country, setCountry] = useState('');
-  const [countryData, setCountryData] = useState({});
+  const [countryData, setCountryData] = useState({
+    cases: '-',
+    deaths: '-',
+    recovered: '-',
+    active: '-',
+    todayCases: '-',
+    todayDeaths: '-',
+    critical: '-'
+  });
   const [loading, setLoading] = useState(false);
 
   // caching data to component
@@ -122,15 +118,12 @@ export default function Cases() {
       .then(data => {
         setOpenLoad(false);
         setOpen(true);
-        console.log(typeof data['cases'])
-        console.log(String(data['cases']))
-        console.log(String(data['cases']).length)
         setAllData({
           cases: addCommas(String(data['cases'])),
-          deaths:
-          recovered:
-          active:
-          affectedCountries:
+          deaths: addCommas(String(data['deaths'])),
+          recovered: addCommas(String(data['recovered'])),
+          active: addCommas(String(data['active'])),
+          affectedCountries: addCommas(String(data['affectedCountries']))
         });
         setAllLoaded(true);
       })
@@ -186,16 +179,45 @@ export default function Cases() {
           setOpenLoad(false);
           // if country data exists, set all values
           if (!(data === undefined || data === null)) {
-            setCountryData(data);
             if (data['country'] === undefined) {
               setSnackCountry(country.toUpperCase());
             } else {
               setSnackCountry(data['country']);
             }
-            data['cases'] === undefined ? setOpenWarning(true) : setOpen(true);
-            setCache(prev => {
-              return {...prev, [country.toLowerCase()]:data};
-            });
+            if (data['cases'] === undefined) {
+              setOpenWarning(true);
+              setCountryData({
+                cases: '-',
+                deaths: '-',
+                recovered: '-',
+                active: '-',
+                todayCases: '-',
+                todayDeaths: '-',
+                critical: '-'
+              });
+            } else {
+              setOpen(true);
+              setCountryData({
+                cases: addCommas(String(data['cases'])),
+                deaths: addCommas(String(data['deaths'])),
+                recovered: addCommas(String(data['recovered'])),
+                active: addCommas(String(data['active'])),
+                todayCases: addCommas(String(data['todayCases'])),
+                todayDeaths: addCommas(String(data['todayDeaths'])),
+                critical: addCommas(String(data['critical']))
+              });
+              setCache(prev => {
+                return {...prev, [country.toLowerCase()]:{
+                  cases: addCommas(String(data['cases'])),
+                  deaths: addCommas(String(data['deaths'])),
+                  recovered: addCommas(String(data['recovered'])),
+                  active: addCommas(String(data['active'])),
+                  todayCases: addCommas(String(data['todayCases'])),
+                  todayDeaths: addCommas(String(data['todayDeaths'])),
+                  critical: addCommas(String(data['critical']))
+                }};
+              });
+            }
             setLoading(false);
           } else {
             setOpenError(true);
@@ -217,17 +239,12 @@ export default function Cases() {
     for (let i = str.length-1; i > 0; i-- ) {
       if (count % 3 === 0) {
           str = str.slice(0,i) + ',' + str.slice(i);
-          console.log(str);
+          // console.log(str);
       }
       count++;
       if (count === limit) { break; }
     }
     return str;
-    // if (str.length > 3 && str.length < 7) {
-    //   return str.slice(0, str.length-4) + ',' + str.slice(str.length-4,str.length-1);
-    // } else if (str.length > 6 && str.length < 10) {
-    //   return str.slice(0, str.length-7) + ',' + str.slice(str.length-7, str.length-4) + ',' + str.slice(str.length-4,str.length-1);
-    // }
   };
 
   const handleChange = (event) => {
@@ -258,8 +275,8 @@ export default function Cases() {
             <FontAwesomeIcon icon={faGlobeAmericas} size='1x' style={{ marginLeft: '20px' }}></FontAwesomeIcon>
         </Typography>
         <br></br>
-        <TableContainer component={Paper} style={{borderColor:'#B0C4DE'}}>
-          <Table style={{border: '1px solid #B0C4DE'}} className={classes.table} aria-label="simple table">
+        <TableContainer component={Paper} style={{borderColor:'#B0C4DE', width:'1000px'}}>
+          <Table style={{border: '1px solid #B0C4DE', tableLayout: 'fixed'}} className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell align='center' style={{color:'#B0C4DE', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
@@ -353,8 +370,8 @@ export default function Cases() {
           { loading ? <CircularProgress disableShrink color='secondary' style={{ marginLeft: '25px', marginTop: '6px'}} /> : ''}
         </form>
         <br></br>
-        <TableContainer component={Paper} style={{borderColor:'#B0C4DE'}}>
-          <Table style={{border: '1px solid #B0C4DE'}} className={classes.table} aria-label="simple table">
+        <TableContainer component={Paper} style={{borderColor:'#B0C4DE', width:'1000px'}}>
+          <Table style={{border: '1px solid #B0C4DE', tableLayout: 'fixed'}} className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell align='center' style={{color:'#B0C4DE', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
@@ -383,25 +400,25 @@ export default function Cases() {
             <TableBody>
               <TableRow>
                 <TableCell align='center' style={{color:'#FFA500', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {!loading ? countryData['cases'] : ''}
+                  {!loading ? countryData['cases'] : '-'}
                 </TableCell>
                 <TableCell align='center' style={{color:'red', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {!loading ? countryData['deaths'] : ''}
+                  {!loading ? countryData['deaths'] : '-'}
                 </TableCell>
                 <TableCell align='center' style={{color:'#228B22', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {!loading ? countryData['recovered'] : ''}
+                  {!loading ? countryData['recovered'] : '-'}
                 </TableCell>
                 <TableCell align='center' style={{color:'#FFFF00', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {!loading ? countryData['active'] : ''}
+                  {!loading ? countryData['active'] : '-'}
                 </TableCell>
                 <TableCell align='center' style={{color:'#FFA500', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {!loading ? countryData['todayCases'] : ''}
+                  {!loading ? countryData['todayCases'] : '-'}
                 </TableCell>
                 <TableCell align='center' style={{color:'red', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {!loading ? countryData['todayDeaths'] : ''}
+                  {!loading ? countryData['todayDeaths'] : '-'}
                 </TableCell>
                 <TableCell align='center' style={{color:'#FF6347', border:'1px solid #B0C4DE', fontSize:'18px', fontWeight:'bold'}}>
-                  {!loading ? countryData['critical'] : ''}
+                  {!loading ? countryData['critical'] : '-'}
                 </TableCell>
               </TableRow>
             </TableBody>
