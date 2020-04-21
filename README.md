@@ -14,7 +14,7 @@
 * A web application that tracks live updates of COVID-19/Coronavirus data
 * Node-Express used for the backend portion for logic and data processing after making API calls
 * React used for the frontend portion of this application
-* UI styled with Material-UI and Font Awesome Icons
+* UI styled with Material-UI (https://material-ui.com/) and Font Awesome Icons (https://fontawesome.com/license/free)
 * Postman tool utilized for testing API calls
 * Features:
   * Data regarding all cases
@@ -27,3 +27,4 @@
 * Update styling
 * Charts with total world data
 * Consistent country searching between cases and charts page
+* Mobile-friendliness
